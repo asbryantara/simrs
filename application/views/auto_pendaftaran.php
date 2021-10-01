@@ -62,10 +62,10 @@ $this->load->view('leftbar');
 							<label class="col-sm-2 control-label">Jenis Kelamin </label>
 							<div class="col-sm-4">
 								<input type="text" id="jk_px" class="form-control" value="<?php if ($px['jk_px'] == 1) {
-																																						echo 'Laki-Laki';
-																																					} else {
-																																						echo 'Perempuan';
-																																					} ?>" disabled>
+																								echo 'Laki-Laki';
+																							} else {
+																								echo 'Perempuan';
+																							} ?>" disabled>
 							</div>
 
 							<label class="col-sm-2 control-label">Alamat</label>
@@ -87,12 +87,12 @@ $this->load->view('leftbar');
 
 							<div class="col-sm-4">
 								<input type="text" id="pembayaran" class="form-control" value="<?php if ($px['asuransi_px'] == 1) {
-																																									echo 'Umum';
-																																								} elseif ($px['asuransi_px'] == 2) {
-																																									echo 'BPJS Kesehatan';
-																																								} else {
-																																									echo $px['asuransi_lain_px'];
-																																								} ?>" disabled>
+																									echo 'Umum';
+																								} elseif ($px['asuransi_px'] == 2) {
+																									echo 'BPJS Kesehatan';
+																								} else {
+																									echo $px['asuransi_lain_px'];
+																								} ?>" disabled>
 							</div>
 
 						</div>
@@ -452,7 +452,6 @@ $this->load->view('leftbar');
 			var bb = $('#bb').val();
 			var a = bb / (tb * tb);
 			imt = a.toFixed(2);
-			tes
 			if ((bb == '') || (tb == '')) {
 				ket_imt = '';
 			} else {
