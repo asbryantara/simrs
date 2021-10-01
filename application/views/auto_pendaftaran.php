@@ -452,7 +452,7 @@ $this->load->view('leftbar');
 			var bb = $('#bb').val();
 			var a = bb / (tb * tb);
 			imt = a.toFixed(2);
-
+			tes
 			if ((bb == '') || (tb == '')) {
 				ket_imt = '';
 			} else {
