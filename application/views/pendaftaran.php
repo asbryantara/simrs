@@ -378,24 +378,34 @@ $this->load->view('leftbar');
 			if ((sys == '') || (dias == '')) {
 				td = '';
 			} else {
-				if ((sys < 90) || (dias < 60)) {
-					td = 'Hypotensi';
-				} else if ((sys < 120) || (dias < 80)) {
+				if ((sys < 120) && (dias < 80)) {
+					console.log('1')
 					td = 'Normal';
-				} else if ((sys < 140) || (dias < 90)) {
-					td = 'Pre Hypertensi';
+				} else if ((sys < 129) && (dias < 80)) {
+					console.log('12')
+					td = 'Elevated';
+				} else if ((sys < 140) && (dias < 90)) {
+					console.log('123')
+					td = 'Hypertensi 1';
+				} else if ((sys < 180) && (dias < 120)) {
+					console.log('1234')
+					td = 'Hypertensi 2';
+				} else if ((sys < 180) && (dias < 120)) {
+					console.log('12346')
+					td = 'Hypertensi 2';
 				} else {
-					td = 'Hypertensi';
+					console.log('asd')
+
 				}
 			}
 			return (td);
 		}
 
 		function actTekananDarah(td) {
-			if (td == 'Hypotensi') {
+			if (td == 'Normal') {
 				$('#td').removeClass().addClass('text-red').html('<b>' + td + '</b>');
 				$('#resultTd').val(1);
-			} else if (td == 'Normal') {
+			} else if (td == 'Elevated') {
 				$('#td').removeClass().addClass('text-blue').html('<b>' + td + '</b>');
 				$('#resultTd').val(2);
 			} else if (td == 'Pre Hypertensi') {
@@ -437,15 +447,18 @@ $this->load->view('leftbar');
 			var bb = $('#bb').val();
 			var a = bb / (tb * tb);
 			imt = a.toFixed(2);
+			// console.log('tb : ', tb)
+			// console.log('bb : ', bb)
+			// console.log('hasil : ', a)
 
 			if ((bb == '') || (tb == '')) {
 				ket_imt = '';
 			} else {
 				if (imt < 18.5) {
 					ket_imt = 'Kurus';
-				} else if (imt <= 25) {
+				} else if (imt <= 23) {
 					ket_imt = 'Normal';
-				} else if (imt <= 27) {
+				} else if (imt <= 29.9) {
 					ket_imt = 'Berat Badan Lebih';
 				} else {
 					ket_imt = 'Gemuk';
@@ -735,6 +748,9 @@ $this->load->view('leftbar');
 			var r2 = 0;
 			var r3 = 0;
 
+			var stroke = 0;
+			var dm = 0;
+
 			var td = tekanan_darah();
 			var rokok = $('#merokok').val();
 			var kol = kolesterol1();
@@ -744,59 +760,48 @@ $this->load->view('leftbar');
 			var riwayatStroke = $('#riwayat_keluarga_stroke').val();
 			var riwayatDm = $('#riwayat_keluarga_dm').val();
 
+			//penambahan rate BMI
+			if (imtVal == 'Gemuk') {
+				stroke += 2;
+				dm += 2;
+			} else if (imtVal == 'Berat Badan Lebih') {
+				stroke += 1;
+				dm += 1;
+			}
 
-			if (td == 'Hypertensi') {
-				r1 += 1;
+			if (td == 'Hypertensi 2') {
+				stroke += 4;
+			} else if (td == 'Hypertensi 1') {
+				stroke += 3;
 			} else if (td == 'Pre Hypertensi') {
-				r2 += 1;
-			} else {
-				r3 += 1;
+				stroke += 2;
+			} else if (td == 'Elevated') {
+				stroke += 1;
 			}
 
 			if (rokok == 3) {
-				r1 += 1;
-			} else if (rokok == 2) {
-				r2 += 1;
-			} else {
-				r3 += 1;
+				stroke += 1;
+				dm += 1;
 			}
 
-			if (kol == 'Tinggi') {
-				r1 += 1;
-			} else if (kol == 'Sedang') {
-				r2 += 1;
-			} else {
-				r3 += 1;
+			// if (kol == 'Tinggi') {
+			// 	r1 += 1;
+			// } else if (kol == 'Sedang') {
+			// 	r2 += 1;
+			// } else {
+			// 	r3 += 1;
+			// }
+
+			if (aktifitas == 3) {
+				stroke += 1;
+				dm += 1;
 			}
 
-			if (gd == 1) {
-				r1 += 1;
-			} else if (riwayatDm == 1) {
-				r2 += 1;
-			} else {
-				r3 += 1;
+			if (riwayatDm == 1) {
+				dm += 1;
 			}
-
-			if (aktifitas == 1) {
-				r1 += 1;
-			} else if (aktifitas == 2) {
-				r2 += 1;
-			} else {
-				r3 += 1;
-			}
-
-			if (imtVal == 'Gemuk') {
-				r1 += 1;
-			} else if (imtVal == 'Berat Badan Lebih') {
-				r2 += 1;
-			} else {
-				r3 += 1;
-			}
-
 			if (riwayatStroke == 1) {
-				r1 += 1;
-			} else {
-				r3 += 1;
+				stroke += 1;
 			}
 
 			if (r1 >= 3) {
@@ -819,9 +824,11 @@ $this->load->view('leftbar');
 			3 : RISIKO TINGGI
 			*/
 
-			console.log('Tinggi : ' + r1);
-			console.log('Sedang : ' + r2);
-			console.log('Rendah : ' + r3);
+			console.log('Stroke : ' + stroke);
+			console.log('Dm : ' + dm);
+			// console.log('Tinggi : ' + r1);
+			// console.log('Sedang : ' + r2);
+			// console.log('Rendah : ' + r3);
 
 			// console.log(td);
 			// console.log(imtVal);
