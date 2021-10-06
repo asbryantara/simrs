@@ -51,7 +51,7 @@
 				<li id="klinik">
 					<a href="<?= base_url('klinik') ?>">
 						<?php $kl = $this->db->get_where('kunjungan', ['status_kunjungan' => 0])->num_rows(); ?>
-						<i class="fa fa-stethoscope"></i> <span>Klinik
+						<i class="fa fa-stethoscope"></i> <span>Poli Rawat Jalan
 							<?php if ($kl > 0) : ?>
 								<small class="label pull-right bg-red"> <?= $kl ?> </small>
 							<?php endif ?>
