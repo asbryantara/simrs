@@ -110,12 +110,18 @@ $this->load->view('leftbar');
 						<h3 class="box-title">Data Pemeriksaan Fisik</h3>
 					</div>
 					<div class="box-body">
+						<div class="form-group">
 
+							<label class="col-sm-2 control-label">Alergi</label>
+							<div class="col-sm-10">
+								<input type="text" name="alergi_obat" id="alergi_obat" class="form-control text-red" autocomplete="off">
+							</div>
+						</div>
 						<div class="form-group">
 							<label class="col-sm-2 control-label">Anamnesa</label>
 
 							<div class="col-sm-10">
-								<textarea name="anamnesa" id="anamnesa" class="form-control" rows="4" required="" readonly=""><?= $kunj['anamnesa'] ?></textarea>
+								<textarea name="anamnesa" id="anamnesa" class="form-control" rows="4" required=""><?= $kunj['anamnesa'] ?></textarea>
 							</div>
 
 						</div>
@@ -186,12 +192,12 @@ $this->load->view('leftbar');
 							<label class="col-sm-2 control-label">Riwayat Keluarga</label>
 
 							<div class="col-sm-4">
-								<input type="checkbox" name="riwayat_keluarga_stroke" class="flat-red" id="riwayat_keluarga_stroke" value="<?= $kunj['riwayat_kel_stroke'] ?>" <?php if ($kunj['riwayat_kel_dm'] == 1) {
-																																													echo 'checked';
-																																												} ?>> Riwayat Keluarga dengan Stroke <br>
-								<input type="checkbox" name="riwayat_keluarga_dm" class="flat-red" id="riwayat_keluarga_dm" value="<?= $kunj['riwayat_kel_dm'] ?>" <?php if ($kunj['riwayat_kel_dm'] == 1) {
-																																										echo 'checked';
-																																									} ?>> Riwayat Keluarga dengan Diabetus Mellitus
+								<input type="checkbox" name="riwayat_keluarga_stroke" class="flat-red" id="riwayat_keluarga_stroke" disabled="disabled" value="<?= $kunj['riwayat_kel_stroke'] ?>" <?php if ($kunj['riwayat_kel_dm'] == 1) {
+																																																		echo 'checked';
+																																																	} ?>> Riwayat Keluarga dengan Stroke <br>
+								<input type="checkbox" name="riwayat_keluarga_dm" class="flat-red" id="riwayat_keluarga_dm" disabled="disabled" value="<?= $kunj['riwayat_kel_dm'] ?>" <?php if ($kunj['riwayat_kel_dm'] == 1) {
+																																															echo 'checked';
+																																														} ?>> Riwayat Keluarga dengan Diabetus Mellitus
 							</div>
 
 						</div>
@@ -464,8 +470,8 @@ $this->load->view('leftbar');
 
 							</div>
 
-							<label class="col-sm-2 control-label">Diagnosis Rekomendasi</label>
-							<div class="col-sm-4" id="dx_rekomendasi"></div>
+							<!-- <label class="col-sm-2 control-label">Diagnosis Rekomendasi</label>
+							<div class="col-sm-4" id="dx_rekomendasi"></div> -->
 
 
 						</div>
@@ -716,8 +722,6 @@ $this->load->view('leftbar');
 			}
 		});
 
-
-
 		$('#klinik').addClass('active');
 
 		$('#no_rm').autocomplete({
@@ -748,6 +752,44 @@ $this->load->view('leftbar');
 				$('#ttl').val(ui.item.tempat_lahir_px + ', ' + ui.item.tgl_lahir_px);
 			}
 		});
+		var availableTags = "<?= site_url('pasien/alergi'); ?>";
+
+		function split(val) {
+			return val.split(/,\s*/);
+		}
+
+		function extractLast(term) {
+			return split(term).pop();
+		}
+		$("#alergi_obat")
+			// don't navigate away from the field on tab when selecting an item
+
+			.autocomplete({
+				minLength: 0,
+				// source: function(request, response) {
+				// 	// delegate back to autocomplete, but extract the last term
+				// 	response($.ui.autocomplete.filter(
+				// 		availableTags, extractLast(request.term)));
+				// },
+				source: "<?php echo site_url('pasien/alergi'); ?>",
+
+				focus: function() {
+					// prevent value inserted on focus
+					return false;
+				},
+				select: function(event, ui) {
+					var terms = split(this.value);
+					// remove the current input
+					terms.pop();
+					// add the selected item
+					terms.push(ui.item.value);
+					// add placeholder to get the comma-and-space at the end
+					terms.push("");
+					this.value = terms.join(", ");
+					return false;
+				}
+			});
+
 
 		$('#no_rm').on('change', function() {
 			var no = $('#no_rm').val();
