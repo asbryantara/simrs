@@ -47,7 +47,7 @@ $this->load->view('leftbar');
 							<label class="col-sm-2 control-label">No. RM</label>
 
 							<div class="col-sm-4">
-								<input type="text" name="no_rm" class="form-control" id="no_rm" value="<?= $px['no_rm'] ?>">
+								<input type="text" name="no_rm" class="form-control" id="no_rm" value="<?= $px['no_rm'] ?>" readonly>
 								<small class="text-red"><b>Note: </b>masukkan no. rm atau nama pasien</small>
 							</div>
 
@@ -253,7 +253,11 @@ $this->load->view('leftbar');
 				<center>
 					<h3 id="res-str"></h3>
 				</center>
+				<center>
+					<h3 id="res-dm"></h3>
+				</center>
 				<input type="hidden" name="risiko_stroke" id="risiko_stroke" value="0">
+				<input type="hidden" name="risiko_dm" id="risiko_dm" value="0">
 				<!-- </div> -->
 
 				<center>
@@ -348,6 +352,12 @@ $this->load->view('leftbar');
 			$('#umur').html(age + ' Tahun');
 		}
 
+		// $('#no_rm').on('change', function() {
+		// 	var no = $('#no_rm').val();
+		// 	var no_rm = no.substr(0, 6);
+		// 	$('#no_rm').val(no_rm);
+		// });
+
 
 		// PEMERIKSAAN HOOOO
 
@@ -393,30 +403,38 @@ $this->load->view('leftbar');
 			if ((sys == '') || (dias == '')) {
 				td = '';
 			} else {
-				if ((sys < 90) || (dias < 60)) {
-					td = 'Hypotensi';
-				} else if ((sys < 120) || (dias < 80)) {
+				if ((sys <= 120) && (dias <= 80)) {
 					td = 'Normal';
+				} else if ((sys < 129) && (dias < 80)) {
+					td = 'Elevated';
 				} else if ((sys < 140) || (dias < 90)) {
-					td = 'Pre Hypertensi';
+					td = 'Hypertensi 1';
+				} else if ((sys < 180) || (dias < 120)) {
+					td = 'Hypertensi 2';
+				} else if ((sys >= 180) || (dias >= 120)) {
+					td = 'Hypertensi 3';
 				} else {
-					td = 'Hypertensi';
+					console.log('asd')
+
 				}
 			}
 			return (td);
 		}
 
 		function actTekananDarah(td) {
-			if (td == 'Hypotensi') {
-				$('#td').removeClass().addClass('text-red').html('<b>' + td + '</b>');
+			if (td == 'Normal') {
+				$('#td').removeClass().addClass('text-green').html('<b>' + td + '</b>');
 				$('#resultTd').val(1);
-			} else if (td == 'Normal') {
+			} else if (td == 'Elevated') {
 				$('#td').removeClass().addClass('text-blue').html('<b>' + td + '</b>');
 				$('#resultTd').val(2);
-			} else if (td == 'Pre Hypertensi') {
+			} else if (td == 'Hypertensi 1') {
 				$('#td').removeClass().addClass('text-red').html('<b>' + td + '</b>');
 				$('#resultTd').val(3);
-			} else if (td == 'Hypertensi') {
+			} else if (td == 'Hypertensi 2') {
+				$('#td').removeClass().addClass('text-red').html('<b>' + td + '</b>');
+				$('#resultTd').val(4);
+			} else if (td == 'Hypertensi 3') {
 				$('#td').removeClass().addClass('text-red').html('<b>' + td + '</b>');
 				$('#resultTd').val(4);
 			} else if (td == '') {
@@ -452,14 +470,18 @@ $this->load->view('leftbar');
 			var bb = $('#bb').val();
 			var a = bb / (tb * tb);
 			imt = a.toFixed(2);
+			// console.log('tb : ', tb)
+			// console.log('bb : ', bb)
+			// console.log('hasil : ', a)
+
 			if ((bb == '') || (tb == '')) {
 				ket_imt = '';
 			} else {
 				if (imt < 18.5) {
 					ket_imt = 'Kurus';
-				} else if (imt <= 25) {
+				} else if (imt <= 23) {
 					ket_imt = 'Normal';
-				} else if (imt <= 27) {
+				} else if (imt <= 29.9) {
 					ket_imt = 'Berat Badan Lebih';
 				} else {
 					ket_imt = 'Gemuk';
@@ -745,9 +767,12 @@ $this->load->view('leftbar');
 		*/
 
 		function cekStroke() {
-			var r1 = 0;
-			var r2 = 0;
-			var r3 = 0;
+			// var r1 = 0;
+			// var r2 = 0;
+			// var r3 = 0;
+
+			var stroke = 0;
+			var dm = 0;
 
 			var td = tekanan_darah();
 			var rokok = $('#merokok').val();
@@ -758,73 +783,68 @@ $this->load->view('leftbar');
 			var riwayatStroke = $('#riwayat_keluarga_stroke').val();
 			var riwayatDm = $('#riwayat_keluarga_dm').val();
 
+			//penambahan rate BMI
+			if (imtVal == 'Gemuk') {
+				stroke += 2;
+				dm += 2;
+			} else if (imtVal == 'Berat Badan Lebih') {
+				stroke += 1;
+				dm += 1;
+			}
 
-			if (td == 'Hypertensi') {
-				r1 += 1;
-			} else if (td == 'Pre Hypertensi') {
-				r2 += 1;
-			} else {
-				r3 += 1;
+			if (td == 'Hypertensi 3') {
+				stroke += 4;
+			} else if (td == 'Hypertensi 2') {
+				stroke += 3;
+			} else if (td == 'Hypertensi 1') {
+				stroke += 2;
+			} else if (td == 'Elevated') {
+				stroke += 1;
 			}
 
 			if (rokok == 3) {
-				r1 += 1;
-			} else if (rokok == 2) {
-				r2 += 1;
-			} else {
-				r3 += 1;
+				stroke += 1;
 			}
 
-			if (kol == 'Tinggi') {
-				r1 += 1;
-			} else if (kol == 'Sedang') {
-				r2 += 1;
-			} else {
-				r3 += 1;
+			// if (kol == 'Tinggi') {
+			// 	r1 += 1;
+			// } else if (kol == 'Sedang') {
+			// 	r2 += 1;
+			// } else {
+			// 	r3 += 1;
+			// }
+
+			if (aktifitas == 3) {
+				stroke += 1;
 			}
 
-			if (gd == 1) {
-				r1 += 1;
-			} else if (riwayatDm == 1) {
-				r2 += 1;
-			} else {
-				r3 += 1;
+			if (riwayatDm == 1) {
+				dm += 1;
 			}
-
-			if (aktifitas == 1) {
-				r1 += 1;
-			} else if (aktifitas == 2) {
-				r2 += 1;
-			} else {
-				r3 += 1;
-			}
-
-			if (imtVal == 'Gemuk') {
-				r1 += 1;
-			} else if (imtVal == 'Berat Badan Lebih') {
-				r2 += 1;
-			} else {
-				r3 += 1;
-			}
-
 			if (riwayatStroke == 1) {
-				r1 += 1;
-			} else {
-				r3 += 1;
+				stroke += 1;
 			}
 
-			if (r1 >= 3) {
+			if (stroke >= 6) {
 				$('#res-str').removeClass().addClass('text-red').html(`<i class="fa fa-warning"> </i> <b>Resiko Tinggi Stroke</b>`);
 				$('#risiko_stroke').val(3);
-			} else if (r2 >= 4) {
+			} else if (stroke >= 4) {
 				$('#res-str').removeClass().addClass('text-orange').html(`<i class="fa fa-warning"> </i> <b>Resiko Sedang Stroke</b>`);
 				$('#risiko_stroke').val(2);
-			} else if (r3 >= 6) {
+			} else if (stroke <= 3) {
 				$('#res-str').removeClass().addClass('text-success').html(`<i class="fa fa-check"> </i> <b>Resiko Rendah Stroke</b>`);
 				$('#risiko_stroke').val(1);
 			} else {
 				$('#res-str').removeClass().html('');
 				$('#risiko_stroke').val(0);
+			}
+
+			if (dm >= 2) {
+				$('#res-dm').removeClass().addClass('text-red').html(`<i class="fa fa-warning"> </i> <b>Resiko Diabetes</b>`);
+				$('#risiko_dm').val(1);
+			} else {
+				$('#res-dm').removeClass().addClass('text-success').html(`<i class="fa fa-check"> </i> <b>Tidak Beresiko Diabetes</b>`);
+				$('#risiko_dm').val(0);
 			}
 
 			/*
@@ -833,9 +853,11 @@ $this->load->view('leftbar');
 			3 : RISIKO TINGGI
 			*/
 
-			console.log('Tinggi : ' + r1);
-			console.log('Sedang : ' + r2);
-			console.log('Rendah : ' + r3);
+			console.log('Stroke : ' + stroke);
+			console.log('Dm : ' + dm);
+			// console.log('Tinggi : ' + r1);
+			// console.log('Sedang : ' + r2);
+			// console.log('Rendah : ' + r3);
 
 			// console.log(td);
 			// console.log(imtVal);
