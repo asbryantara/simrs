@@ -1,8 +1,10 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
-class Pendaftaran extends CI_Controller {
+defined('BASEPATH') or exit('No direct script access allowed');
+class Pendaftaran extends CI_Controller
+{
 
-	public function __construct(){
+	public function __construct()
+	{
 		parent::__construct();
 		$this->load->model('M_pendaftaran', 'daftar');
 		$this->load->model('M_apotek', 'apotek');
@@ -15,28 +17,32 @@ class Pendaftaran extends CI_Controller {
 		// 4 SELESAI
 	}
 
-	public function index(){
+	public function index()
+	{
 		$this->load->view('pendaftaran');
 	}
 
-	public function list_pendaftaran(){
+	public function list_pendaftaran()
+	{
 		$data['pendaftaran'] = $this->daftar->list_pendaftaran()->result();
 		// print_r($data);
 		$this->load->view('list_pendaftaran', $data);
 	}
 
-	public function auto(){
+	public function auto()
+	{
 		$no_rm = $this->uri->segment(3);
-		$data['px'] = $this->db->get_where('pasien', ['no_rm'=>$no_rm])->row_array();
+		$data['px'] = $this->db->get_where('pasien', ['no_rm' => $no_rm])->row_array();
 		$this->load->view('auto_pendaftaran', $data);
 	}
 
-	function save(){
-		if($this->input->post('dataLab') == 1){
+	function save()
+	{
+		if ($this->input->post('dataLab') == 1) {
 			$data['id_lab'] = $this->save_lab();
 		}
 
-		if($this->input->post('dataRad') == 1){
+		if ($this->input->post('dataRad') == 1) {
 			$data['id_radiologi'] = $this->save_rad();
 		}
 
@@ -60,16 +66,16 @@ class Pendaftaran extends CI_Controller {
 
 
 		// print_r($data);
-
 		$simpan = $this->db->insert('kunjungan', $data);
-		if($simpan){
+		if ($simpan) {
 			$this->session->set_flashdata('success', 'Berhasil menambahkan data');
 			redirect(base_url('pendaftaran'));
 		}
 	}
 
-	function save_lab(){
-		if($this->input->post('dataLab') == 1){
+	function save_lab()
+	{
+		if ($this->input->post('dataLab') == 1) {
 			$data['kolesterol'] = $this->input->post('kolesterol');
 			$data['id_user'] = $this->session->userdata('id_user');
 			$data['gda'] = $this->input->post('gda');
@@ -86,8 +92,9 @@ class Pendaftaran extends CI_Controller {
 		}
 	}
 
-	function update_lab($id_lab){
-		if($this->input->post('dataLab') == 1){
+	function update_lab($id_lab)
+	{
+		if ($this->input->post('dataLab') == 1) {
 			$data['kolesterol'] = $this->input->post('kolesterol');
 			$data['id_user'] = $this->session->userdata('id_user');
 			$data['gda'] = $this->input->post('gda');
@@ -95,12 +102,13 @@ class Pendaftaran extends CI_Controller {
 			$data['gdsm'] = $this->input->post('gdsm');
 			$data['gd'] = $this->input->post('resultGd');
 
-			$this->db->update('lab', $data, ['id_lab'=>$id_lab]);
+			$this->db->update('lab', $data, ['id_lab' => $id_lab]);
 		}
 	}
 
-	function save_rad(){
-		if($this->input->post('dataRad') == 1){
+	function save_rad()
+	{
+		if ($this->input->post('dataRad') == 1) {
 			$data['id_user'] = $this->session->userdata('id_user');
 			$data['jenis'] = 0;
 			$data['hasil'] = $this->input->post('hasil');
@@ -114,94 +122,99 @@ class Pendaftaran extends CI_Controller {
 		}
 	}
 
-	function update_rad($id_radiologi){
-		if($this->input->post('dataRad') == 1){
+	function update_rad($id_radiologi)
+	{
+		if ($this->input->post('dataRad') == 1) {
 			$data['id_user'] = $this->session->userdata('id_user');
 			$data['jenis'] = 0;
 			$data['hasil'] = $this->input->post('hasil');
 
-			$this->db->update('radiologi', $data, ['id_radiologi'=>$id_radiologi]);
+			$this->db->update('radiologi', $data, ['id_radiologi' => $id_radiologi]);
 		}
 	}
 
-	function autocomplete(){
+	function autocomplete()
+	{
 		if (isset($_GET['term'])) {
-		  	$result = $this->daftar->autocomplete($_GET['term']);
-		   	if (count($result) > 0) {
-		    foreach ($result as $row)
-	     		
+			$result = $this->daftar->autocomplete($_GET['term']);
+			if (count($result) > 0) {
+				foreach ($result as $row)
 
-		     	$arr_result[] = array(
 
-					'label'			=> $row->no_rm.' - '.$row->nama_px.' - '.$row->tgl_lahir_px.' - '.$row->alamat_px,
-					'no_rm'			=> $row->no_rm,
-					'nama_px'		=> $row->nama_px,
-					'alamat_px'		=> $row->alamat_px,
-					// 'jk_px'			=> $jk,
-					'jk_px'			=> $row->jk_px,
-					'tempat_lahir_px'	=> $row->tempat_lahir_px,
-					'tgl_lahir_px'		=> $row->tgl_lahir_px,
-					// 'asuransi_px'		=> $as,
-					'asuransi_px'		=> $row->asuransi_px,
-					'asuransi_lain_px'		=> $row->asuransi_lain_px,
-					'alergi_px'		=> $row->alergi_px,
-				);
-		     	echo json_encode($arr_result);
-		   	}
+					$arr_result[] = array(
+
+						'label'			=> $row->no_rm . ' - ' . $row->nama_px . ' - ' . $row->tgl_lahir_px . ' - ' . $row->alamat_px,
+						'no_rm'			=> $row->no_rm,
+						'nama_px'		=> $row->nama_px,
+						'alamat_px'		=> $row->alamat_px,
+						// 'jk_px'			=> $jk,
+						'jk_px'			=> $row->jk_px,
+						'tempat_lahir_px'	=> $row->tempat_lahir_px,
+						'tgl_lahir_px'		=> $row->tgl_lahir_px,
+						// 'asuransi_px'		=> $as,
+						'asuransi_px'		=> $row->asuransi_px,
+						'asuransi_lain_px'		=> $row->asuransi_lain_px,
+						'alergi_px'		=> $row->alergi_px,
+					);
+				echo json_encode($arr_result);
+			}
 		}
 	}
 
-	function detail(){
+	function detail()
+	{
 		$id = $this->uri->segment(3);
 
 		$data['kunj']  = $this->daftar->detail($id)->row_array();
-		$data['status_lab'] = $this->db->get_where('kunjungan', ['id_lab'=> null, 'id_kunjungan'=>$id])->num_rows();
-		$data['status_rad'] = $this->db->get_where('kunjungan', ['id_radiologi'=> null, 'id_kunjungan'=>$id])->num_rows();
-		$data['status_resep'] = $this->db->get_where('resep', ['id_kunjungan'=>$id])->num_rows();
-		$data['status_diag'] = $this->db->get_where('diagnosa', ['id_kunjungan'=>$id])->num_rows();
+		$data['status_lab'] = $this->db->get_where('kunjungan', ['id_lab' => null, 'id_kunjungan' => $id])->num_rows();
+		$data['status_rad'] = $this->db->get_where('kunjungan', ['id_radiologi' => null, 'id_kunjungan' => $id])->num_rows();
+		$data['status_resep'] = $this->db->get_where('resep', ['id_kunjungan' => $id])->num_rows();
+		$data['status_diag'] = $this->db->get_where('diagnosa', ['id_kunjungan' => $id])->num_rows();
 		$data['resep'] = $this->apotek->show_resep($id)->result();
 		$data['dx'] = $this->daftar->diagnosa($id)->result();
 		$this->load->view('detail_pendaftaran', $data);
 	}
 
-	function edit(){
+	function edit()
+	{
 		$id = $this->uri->segment(3);
 		$data['kunj'] = $this->daftar->detail($id)->row_array();
 		$this->load->view('edit_pendaftaran', $data);
 	}
 
-	function update(){
+	function update()
+	{
 
 		$id_kunjungan = $this->input->post('id_kunjungan');
 		$dataLab = $this->input->post('dataLab');
 		$dataRad = $this->input->post('dataRad');
 
-		$row = $this->db->get_where('kunjungan', ['id_kunjungan'=>$id_kunjungan])->row_array();
+		$row = $this->db->get_where('kunjungan', ['id_kunjungan' => $id_kunjungan])->row_array();
 
-		if($dataLab == 0){
-			if($row['id_lab']  != null){
-				$this->db->delete('lab', ['id_lab'=>$row['id_lab']]);
+		if ($dataLab == 0) {
+			if ($row['id_lab']  != null) {
+				$this->db->delete('lab', ['id_lab' => $row['id_lab']]);
 				$data['id_lab'] = null;
 			}
-		}else{
-			$cek = $this->db->get_where('lab', ['id_lab'=>$row['id_lab']])->row_array();
-			if($cek['id_lab']==null){
+		} else {
+			$cek = $this->db->get_where('lab', ['id_lab' => $row['id_lab']])->row_array();
+			if ($cek['id_lab'] == null) {
 				$data['id_lab'] = $this->save_lab();
-			}else{
+			} else {
 				$this->update_lab($row['id_lab']);
 			}
 		}
 
-		$cek = $this->db->get_where('radiologi', ['id_radiologi'=>$row['id_radiologi']])->row_array();
-		if($dataRad == 0){
-			if($cek['id_radiologi']!=null){
-				$this->db->delete('radiologi', ['id_radiologi'=>$cek['id_radiologi']]);				
+		$cek = $this->db->get_where('radiologi', ['id_radiologi' => $row['id_radiologi']])->row_array();
+		if ($dataRad == 0) {
+			if ($cek['id_radiologi'] != null) {
+				$this->db->delete('radiologi', ['id_radiologi' => $cek['id_radiologi']]);
 				$data['id_radiologi'] = null;
 			}
-		}else{
-			if($cek['id_radiologi']==null){
+		} else {
+			if ($cek['id_radiologi'] == null) {
 				$data['id_radiologi'] = $this->save_rad();
-			}else{
+			} else {
 				$this->update_rad($row['id_radiologi']);
 			}
 		}
@@ -222,20 +235,21 @@ class Pendaftaran extends CI_Controller {
 		$data['riwayat_kel_dm'] = $this->input->post('riwayat_keluarga_dm');
 		$data['risiko_stroke'] = $this->input->post('risiko_stroke');
 
-		$update = $this->db->update('kunjungan', $data, ['id_kunjungan'=>$id_kunjungan]);
-		if($update){
+		$update = $this->db->update('kunjungan', $data, ['id_kunjungan' => $id_kunjungan]);
+		if ($update) {
 			$this->session->set_flashdata('success', 'Berhasil merubah data');
 			redirect(base_url('pendaftaran/list_pendaftaran'));
 		}
 	}
 
-	function delete(){
+	function delete()
+	{
 		$id_kunjungan = $this->uri->segment(3);
-		$delete = $this->db->delete('kunjungan', ['id_kunjungan'=>$id_kunjungan]);
-		if($delete){
+		$delete = $this->db->delete('kunjungan', ['id_kunjungan' => $id_kunjungan]);
+		if ($delete) {
 			$this->session->set_flashdata('success', 'Berhasil menghapus data');
 			redirect(base_url('pendaftaran/list_pendaftaran'));
-		}else{
+		} else {
 			$this->session->set_flashdata('warning', 'Gagal menghapus data');
 			redirect(base_url('pendaftaran/list_pendaftaran'));
 		}

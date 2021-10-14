@@ -1,4 +1,4 @@
-<?php 
+<?php
   $this->load->view('header');
   $this->load->view('leftbar');
 ?>
@@ -21,15 +21,15 @@
             </div>
           <?php endif ?>
         </div>
-        
+
         <div class="col-md-12">
-          
+
           <a href="<?= base_url('klinik/sudah_periksa') ?>" class="btn btn-info"><i class="fa fa-arrow-left"> </i> Kembali</a>
           <!-- <a href="<?= base_url('pendaftaran/list_pendaftaran') ?>" class="btn btn-primary"><i class="fa fa-eye"> </i> Lihat Pendaftaran</a> -->
-         
+
           <br>
           <br>
-          
+
         </div>
 
         <?= form_open(base_url('klinik/update'), ['class'=>'form-horizontal']) ?>
@@ -42,7 +42,7 @@
               <?php endif ?>
             </div>
               <div class="box-body">
-                
+
                 <div class="form-group">
                   <label class="col-sm-2 control-label">No. RM</label>
 
@@ -50,7 +50,7 @@
                     <input type="text" class="form-control" id="no_rm" value="<?= $kunj['no_rm'] ?>" disabled>
                     <input type="hidden" name="id_kunjungan" id="id_kunjungan" value="<?= $kunj['id_kunjungan'] ?>">
                   </div>
-               
+
                   <label class="col-sm-2 control-label">Nama Pasien </label>
 
                   <div class="col-sm-4">
@@ -67,7 +67,7 @@
 
                   <label class="col-sm-2 control-label">Alamat</label>
                   <div class="col-sm-4">
-                    <textarea class="form-control" id="alamat_px" disabled=""><?= $kunj['alamat_px'] ?></textarea> 
+                    <textarea class="form-control" id="alamat_px" disabled=""><?= $kunj['alamat_px'] ?></textarea>
                   </div>
                 </div>
 
@@ -79,13 +79,13 @@
                     <input type="hidden" id="biday" value="<?= $kunj['tgl_lahir_px'] ?>">
                     <small id="umur" style="font-weight: 700;"></small>
                   </div>
-                  
+
                    <label class="col-sm-2 control-label">Pembayaran</label>
 
                   <div class="col-sm-4">
                     <input type="text" id="pembayaran" class="form-control" value="<?php if($kunj['asuransi_px'] == 1){echo 'Umum';}elseif($kunj['asuransi_px'] == 2){echo 'BPJS Kesehatan';}else{echo $kunj['asuransi_lain_px'];} ?>" disabled>
                   </div>
-                  
+
                 </div>
 
              </div>
@@ -98,7 +98,7 @@
               <h3 class="box-title">Data Pemeriksaan Fisik</h3>
             </div>
               <div class="box-body">
-                
+
                <div class="form-group">
                    <label class="col-sm-2 control-label">Anamnesa</label>
 
@@ -119,7 +119,7 @@
                   <div class="col-sm-2">
                     <input type="text" name="diastol" id="dias" class="form-control" placeholder="Diastole" value="<?= $kunj['diastol'] ?>" required="" readonly >
                   </div>
-                  
+
                    <label class="col-sm-2 control-label">Tinggi / Berat Badan</label>
 
                   <div class="col-sm-2">
@@ -134,7 +134,7 @@
                 </div>
 
                 <div class="form-group">
-                  
+
                   <label class="col-sm-2 control-label">Merokok</label>
 
                   <div class="col-sm-4">
@@ -158,14 +158,14 @@
                 </div>
 
                 <div class="form-group">
-                 
+
                   <label class="col-sm-2 control-label">Riwayat Keluarga</label>
 
                   <div class="col-sm-4">
-                    <input type="checkbox" name="riwayat_keluarga_stroke" class="flat-red" id="riwayat_keluarga_stroke" value="<?= $kunj['riwayat_kel_stroke'] ?>" <?php if($kunj['riwayat_kel_dm']==1){echo 'checked';} ?>> Riwayat Keluarga dengan Stroke <br>
-                    <input type="checkbox" name="riwayat_keluarga_dm" class="flat-red" id="riwayat_keluarga_dm" value="<?= $kunj['riwayat_kel_dm'] ?>" <?php if($kunj['riwayat_kel_dm']==1){echo 'checked';} ?>> Riwayat Keluarga dengan Diabetus Mellitus
+                    <input type="checkbox" name="riwayat_keluarga_stroke" disabled="disabled" class="flat-red" id="riwayat_keluarga_stroke" value="<?= $kunj['riwayat_kel_stroke'] ?>" <?php if($kunj['riwayat_kel_dm']==1){echo 'checked';} ?>> Riwayat Keluarga dengan Stroke <br>
+                    <input type="checkbox" name="riwayat_keluarga_dm" disabled="disabled" class="flat-red" id="riwayat_keluarga_dm" value="<?= $kunj['riwayat_kel_dm'] ?>" <?php if($kunj['riwayat_kel_dm']==1){echo 'checked';} ?>> Riwayat Keluarga dengan Diabetus Mellitus
                   </div>
-                  
+
                 </div>
              </div>
           </div>
@@ -184,7 +184,7 @@
                   <input type="text" name="kolesterol" id="kolesterol" class="form-control"  value="<?= $kunj['kolesterol'] ?>">
                   <small id="res-kol"></small>
                 </div>
-                
+
                  <label class="col-sm-2 control-label">Gula Darah Acak</label>
 
                 <div class="col-sm-4">
@@ -192,7 +192,7 @@
                     <input type="hidden" name="resultGd" id="resultGd" value="<?= $kunj['gd'] ?>">
                   <small id="res-gda"></small>
                 </div>
-                
+
               </div>
 
               <div class="form-group">
@@ -202,14 +202,14 @@
                   <input type="text" name="gdp" id="gdp" class="form-control" value="<?= $kunj['gdp'] ?>">
                   <small id="res-gdp"></small>
                 </div>
-                
+
                  <label class="col-sm-2 control-label">Gula Darah Setelah Makan</label>
 
                 <div class="col-sm-4">
                   <input type="text" name="gdsm" id="gdsm" class="form-control" value="<?= $kunj['gdsm'] ?>">
                   <small id="res-gdsm"></small>
                 </div>
-                
+
               </div>
 
               <div class="form-group">
@@ -219,14 +219,14 @@
                   <input type="text" name="hb" id="hb" value="<?= $kunj['hb'] ?>" class="form-control">
                   <small id="res-hb"></small>
                 </div>
-                
+
                  <label class="col-sm-2 control-label">Trombosit</label>
 
                 <div class="col-sm-4">
                   <input type="text" name="trombosit" id="trombosit" value="<?= $kunj['trombosit'] ?>" class="form-control">
                   <small id="res-trombosit"></small>
                 </div>
-                
+
               </div>
 
               <div class="form-group">
@@ -236,14 +236,14 @@
                   <input type="text" name="sgot" id="sgot" value="<?= $kunj['sgot'] ?>" class="form-control">
                   <small id="res-sgot"></small>
                 </div>
-                
+
                  <label class="col-sm-2 control-label">SGPT</label>
 
                 <div class="col-sm-4">
                   <input type="text" name="sgpt" id="sgpt" value="<?= $kunj['sgpt'] ?>" class="form-control">
                   <small id="res-sgpt"></small>
                 </div>
-                
+
               </div>
 
               <div class="form-group">
@@ -253,7 +253,7 @@
                   <input type="text" name="asamurat" id="asamurat" value="<?= $kunj['asamurat'] ?>" class="form-control">
                   <small id="res-asamurat"></small>
                 </div>
-                
+
                  <label class="col-sm-2 control-label">Widal</label>
 
                 <div class="col-sm-4">
@@ -264,7 +264,7 @@
                   </select>
                   <small id="res-widal"></small>
                 </div>
-                
+
               </div>
 
               <div class="form-group">
@@ -273,14 +273,14 @@
                 <div class="col-sm-4">
                   <textarea name="lain" class="form-control" rows="4"><?= $kunj['lain'] ?></textarea>
                 </div>
-                
+
                 </div>
-                
+
 
 
             </div>
 
-            
+
 
 
           </div>
@@ -302,17 +302,17 @@
                     <option <?php if($kunj['jenis_pemeriksaan'] == 'MRI'){echo 'selected';} ?>>MRI</option>
                     <option <?php if($kunj['jenis_pemeriksaan'] == 'Mamografi'){echo 'selected';} ?>>Mamografi</option>
                     <option <?php if($kunj['jenis_pemeriksaan'] == 'Angiografi'){echo 'selected';} ?>>Angiografi</option>
-                  </select>                  
+                  </select>
                 </div>
-                
+
                 <label class="col-sm-2 control-label">Hasil Pemeriksaan Radiologi</label>
 
                 <div class="col-sm-4">
                     <textarea class="form-control" name="hasil" id="hasilRad" rows="4"><?= $kunj['hasil'] ?></textarea>
-                  
+
                 </div>
-                
-                
+
+
               </div>
             </div>
           </div>
@@ -323,7 +323,7 @@
             </div>
             <div class="box-body">
               <div class="form-group">
-                 <!-- 
+                 <!--
                   <label class="col-sm-2 control-label">Diagnosis</label>
 
                   <div class="col-sm-3">
@@ -352,7 +352,7 @@
 
                   <label class="col-sm-2 control-label"></label>
                   <div class="col-sm-3">
-                    <input type="text" name="diagnosa3" class="form-control" id="diagnosa3" placeholder="Diagnosis Lainnya"> 
+                    <input type="text" name="diagnosa3" class="form-control" id="diagnosa3" placeholder="Diagnosis Lainnya">
                   </div>
                   <div class="col-sm-1">
                     <input type="text" name="kode_diagnosa3" class="form-control" id="kode_diagnosa3">
@@ -362,7 +362,7 @@
                 <label class="col-sm-2 control-label">Diagnosis</label>
 
                 <div class="col-sm-4">
-                  
+
                   <table>
                     <tr>
                       <td style="width: 70%;">
@@ -390,7 +390,7 @@
 
                     <tr>
                       <td>
-                        <input type="text" name="diagnosa3" class="form-control" id="diagnosa3" placeholder="Diagnosis Lainnya" value="<?= $dx3['nama_diagnosa'] ?>"> 
+                        <input type="text" name="diagnosa3" class="form-control" id="diagnosa3" placeholder="Diagnosis Lainnya" value="<?= $dx3['nama_diagnosa'] ?>">
                       </td>
                       <td></td>
                       <td>
@@ -401,14 +401,14 @@
 
                 </div>
 
-                <label class="col-sm-2 control-label">Diagnosis Rekomendasi</label>
-                <div class="col-sm-4" id="dx_rekomendasi"></div>
+                <!-- <label class="col-sm-2 control-label">Diagnosis Rekomendasi</label>
+                <div class="col-sm-4" id="dx_rekomendasi"></div> -->
 
 
               </div>
             </div>
             <div class="box-footer">
-              <?php 
+              <?php
                 if($kunj['risiko_stroke'] == 1){
                   $kelas = 'text-success';
                   $isi = '<i class="fa fa-check"> </i> Risiko Rendah Stroke';
@@ -436,15 +436,15 @@
             </div>
             <div class="box-body">
               <div class="form-group">
-                 
+
                   <label class="col-sm-2 control-label">Pilih Tindakan</label>
 
                   <div class="col-sm-10">
 
                     <select name="tindakan[]" id="tindakan" class="form-control select2" multiple="multiple" data-placeholder="Pilih Tindakan" style="width: 100%">
                       <?php foreach($tx as $t): ?>
-                        <option value="<?= $t->kode_tindakan ?>" 
-                          <?php 
+                        <option value="<?= $t->kode_tindakan ?>"
+                          <?php
                             if(count($tind) > 0 ){
                               if(in_array($t->kode_tindakan, $tind)){echo 'selected';}
                             }
@@ -507,7 +507,7 @@
                       </tr>
                     </thead>
                     <tbody id="rowResep">
-                      
+
                     </tbody>
                   </table>
                 </div>
@@ -515,10 +515,10 @@
               </div>
             </div>
 
-            
+
           </div>
 
-          
+
 
           <center>
                <button type="submit" class="btn btn-primary btn-sm">Simpan</button>
@@ -585,8 +585,8 @@
     $('#diagnosa1').autocomplete({
       source: "<?php echo site_url('klinik/auto_diagnosa');?>",
       select: function (event, ui) {
-        $('#diagnosa1').val(ui.item.diagnosa); 
-        $('#kode_diagnosa1').val(ui.item.kode_diagnosa); 
+        $('#diagnosa1').val(ui.item.diagnosa);
+        $('#kode_diagnosa1').val(ui.item.kode_diagnosa);
         $('#kode_diagnosa1').attr('readonly','');
       }
     });
@@ -594,16 +594,16 @@
     $('#diagnosa2').autocomplete({
       source: "<?php echo site_url('klinik/auto_diagnosa');?>",
       select: function (event, ui) {
-        $('#diagnosa2').val(ui.item.diagnosa); 
-        $('#kode_diagnosa2').val(ui.item.kode_diagnosa); 
+        $('#diagnosa2').val(ui.item.diagnosa);
+        $('#kode_diagnosa2').val(ui.item.kode_diagnosa);
       }
     });
 
     $('#diagnosa3').autocomplete({
       source: "<?php echo site_url('klinik/auto_diagnosa');?>",
       select: function (event, ui) {
-        $('#diagnosa3').val(ui.item.diagnosa); 
-        $('#kode_diagnosa3').val(ui.item.kode_diagnosa); 
+        $('#diagnosa3').val(ui.item.diagnosa);
+        $('#kode_diagnosa3').val(ui.item.kode_diagnosa);
       }
     });
 
@@ -632,7 +632,7 @@
     });
 
     $('#klinik').addClass('active');
-    
+
     $('#no_rm').autocomplete({
       source: "<?php echo site_url('pendaftaran/autocomplete');?>",
 
@@ -653,12 +653,12 @@
            as = 'Umum';
           }
 
-          $('#nama_px').val(ui.item.nama_px); 
-          $('#no_rm').val(ui.item.no_rm); 
-          $('#jk_px').val(jk); 
-          $('#alamat_px').val(ui.item.alamat_px); 
-          $('#pembayaran').val(as); 
-          $('#ttl').val(ui.item.tempat_lahir_px+', '+ui.item.tgl_lahir_px); 
+          $('#nama_px').val(ui.item.nama_px);
+          $('#no_rm').val(ui.item.no_rm);
+          $('#jk_px').val(jk);
+          $('#alamat_px').val(ui.item.alamat_px);
+          $('#pembayaran').val(as);
+          $('#ttl').val(ui.item.tempat_lahir_px+', '+ui.item.tgl_lahir_px);
         }
     });
 
@@ -667,7 +667,7 @@
       var no_rm = no.substr(0,6);
       $('#no_rm').val(no_rm);
     });
-    
+
      umur();
 
     // UMUR
@@ -682,7 +682,7 @@
         year = 1;
       }
       var age = today.getFullYear() - birthday.getFullYear() - year;
-   
+
       if(age < 0){
         age = 0;
       }
@@ -698,7 +698,7 @@
     =================================================================================
                           KODE
     =================================================================================
-    KATEGORI              1                 2               3                   4 
+    KATEGORI              1                 2               3                   4
     =================================================================================
     TEKANAN DARAH         HYPOTENSI         NORMAL          PREHYPERTENSI       -
     IMT                   KURUS             NORMAL          BERAT BADAN LEBIH   GEMUK
@@ -711,18 +711,18 @@
       checkboxClass: 'icheckbox_flat-blue',
       radioClass   : 'iradio_flat-blue'
     });
-    
+
 
     /*
     =======================================
                   TEKANAN DARAH
     =======================================
-    KATEGORI          SYSTOLE   | DIASTOLE 
+    KATEGORI          SYSTOLE   | DIASTOLE
     =======================================
     hypotensi       = <90       | <60
     normal          = 90 - 120  | 60 - 80
     pre hypertensi  = 120 - 140 | 80 - 90
-    hypertensi      = 140 - 160 | 90 - 100 
+    hypertensi      = 140 - 160 | 90 - 100
     =======================================
     */
 
@@ -805,7 +805,7 @@
           ket_imt = 'Berat Badan Lebih';
         }else{
           ket_imt = 'Gemuk';
-        }        
+        }
       }
 
 
@@ -848,7 +848,7 @@
       $('#res-gdsm').removeClass().html('');
       $('#res-gda').removeClass().html('');
       $('#dataLab').val(1);
-      
+
     });
 
     // MENYEMBUNYIKAN DATA LAB
@@ -890,7 +890,7 @@
     =======================================
     Gula Darah Puasa          = 70 - 110
     Gula Darah Setelah Makan  = 110 - 125
-    Gula Darah Acak           = < 140 
+    Gula Darah Acak           = < 140
     Kolesterol Total          = < 200
     =======================================
     */
@@ -1305,10 +1305,10 @@
     Tekanan Darah         >140/90               120-139/80-89           <120/80
     Kebiasaan Merokok     Perokok               Kadang-kadang merokok   Tidak Merokok
     Cholesterol           >240                  200-239                 <200
-    Diabetes              Ya                    Ada riwayat keluarga    Tidak 
+    Diabetes              Ya                    Ada riwayat keluarga    Tidak
     Aktivitas fisik       Malas                 Kadang-kadang           Teratur
     Berat Badan           Gemuk                 Sedikit Gemuk           Normal
-    Riwayat Keluarga      Ya                    Tidak yakin             Tidak   
+    Riwayat Keluarga      Ya                    Tidak yakin             Tidak
     -----------------------------------------------------------------------------------
     JIKA JUMLAH           >=3                   4-6                     6-8
     */
@@ -1397,8 +1397,8 @@
       }
 
       /*
-      1 : RISIKO RENDAH 
-      2 : RISIKO SEDANG 
+      1 : RISIKO RENDAH
+      2 : RISIKO SEDANG
       3 : RISIKO TINGGI
       */
 
@@ -1455,7 +1455,7 @@
           $('.dxTd').remove();
         }
         $('.dxTd').remove();
-      
+
         $('#dx_rekomendasi').append(`<div class="dxTd"> <li> `+namaTd+` </li> <br></div>`);
         // $('#dx_rekomendasi').append(`<div class="dxTd"> <input type="checkbox" name="dx_rek[]" class="flat-red dxRekTd" value="`+kodeTd+`"> `+namaTd+` <br></div>`);
       }else{
@@ -1523,7 +1523,7 @@
         success:function(data){
           if(data == 2){
             alert('obat yang diinputkan sudah dipilih !');
-          }else if(data == 3){ 
+          }else if(data == 3){
             alert('Stok Obat Habis !');
           }else if(data.status == 4){
             alert('Stok obat tidak mencukupi, Stok obat = '+data.sisa);
