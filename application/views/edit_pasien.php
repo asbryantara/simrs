@@ -1,4 +1,4 @@
-<?php 
+<?php
   $this->load->view('header');
   $this->load->view('leftbar');
 ?>
@@ -21,14 +21,14 @@
             </div>
           <?php endif ?>
         </div>
-        
+
         <div class="col-md-12">
-          
+
           <a href="<?= base_url('pasien') ?>" class="btn btn-primary"><i class="fa fa-arrow-left"> </i> &nbsp; Kembali</a>
-         
+
           <br>
           <br>
-          
+
         </div>
 
         <div class="col-md-12">
@@ -38,7 +38,7 @@
             </div>
             <?= form_open(base_url('pasien/update'), ['class'=>'form-horizontal']) ?>
               <div class="box-body">
-                
+
                 <div class="form-group">
                   <label class="col-sm-2 control-label">No. RM</label>
 
@@ -46,7 +46,7 @@
                     <input type="text" class="form-control" id="no_rm" value="<?= $px['no_rm'] ?>" disabled="">
                     <input type="hidden" name="no_rm" value="<?= $px['no_rm'] ?>" >
                   </div>
-               
+
                   <label class="col-sm-2 control-label">NIK</label>
 
                   <div class="col-sm-4">
@@ -60,7 +60,7 @@
                   <div class="col-sm-4">
                     <input type="text" name="nama_px" class="form-control" id="nama_px" value="<?= $px['nama_px'] ?>" required="">
                   </div>
-               
+
                   <label class="col-sm-2 control-label">Jenis Kelamin <small class="text-red">*</small></label>
 
                   <div class="col-sm-4">
@@ -77,7 +77,7 @@
                       <option value="">-- silahkan pilih --</option>
                       <?php foreach($koka as $kk): ?>
 
-                        <?php 
+                        <?php
                           $tl = str_replace('KABUPATEN ', '', str_replace('KOTA ', '', $kk->nama_kota_kab));
                         ?>
 
@@ -85,7 +85,7 @@
                       <?php endforeach ?>
                     </select>
                   </div>
-               
+
                   <label class="col-sm-2 control-label">Tanggal Lahir <small class="text-red">*</small></label>
 
                   <div class="col-sm-4">
@@ -100,7 +100,7 @@
                   <div class="col-sm-4">
                     <textarea  name="alamat_px" class="form-control" required=""><?= $px['alamat_px'] ?></textarea>
                   </div>
-               
+
                   <label class="col-sm-2 control-label">Provinsi</label>
 
                   <div class="col-sm-4">
@@ -124,7 +124,7 @@
                       <?php endforeach ?>
                     </select>
                   </div>
-               
+
                   <label class="col-sm-2 control-label">Kecamatan</label>
 
                   <div class="col-sm-4">
@@ -148,7 +148,7 @@
                       <?php endforeach ?>
                     </select>
                   </div>
-               
+
                   <label class="col-sm-2 control-label">Pendidikan Terakhir</label>
 
                   <div class="col-sm-4">
@@ -176,7 +176,7 @@
                       <option value="3" <?php if($px['asuransi_px']==3) echo 'selected'; ?>>Asuransi Lain</option>
                     </select>
                   </div>
-               
+
                   <div id="no_asuransi" class="<?php if(($px['asuransi_px']==1)||($px['asuransi_px']==3)) echo 'hidden'; ?>">
                     <label class="col-sm-2 control-label">No. Kartu BPJS</label>
 
@@ -214,7 +214,7 @@
                   <div class="col-sm-4">
                     <input type="text" name="telp_px" id="telp_px" class="form-control" autocomplete="off" value="<?= $px['telp_px'] ?>">
                   </div>
-               
+
                 </div>
 
                 <div class="form-group">
@@ -232,11 +232,11 @@
                     </select>
                   </div>
 
-                  <label class="col-sm-2 control-label">Alergi</label>
+                  <!-- <label class="col-sm-2 control-label">Alergi</label>
                   <div class="col-sm-4">
                     <input type="text" name="alergi_px" id="alergi_px" value="<?= $px['alergi_px'] ?>" class="form-control" autocomplete="off">
-                  </div>
-               
+                  </div> -->
+
                 </div>
 
              </div>
@@ -285,7 +285,7 @@
       source: "<?php echo site_url('pasien/alergi');?>",
 
       select: function (event, ui) {
-          $('#alergi_px').val(ui.item.nama_konten); 
+          $('#alergi_px').val(ui.item.nama_konten);
         }
     });
 
@@ -308,13 +308,13 @@
         year = 1;
       }
       var age = today.getFullYear() - birthday.getFullYear() - year;
-   
+
       if(age < 0){
         age = 0;
       }
       $('#umur').html(age+' Tahun');
     }
-    
+
     // MENAMPILKAN KOTA KETIKA MEMILIH PROVINSI
     $('#id_provinsi').on('change', function(){
       var id_provinsi = $('#id_provinsi').val();
@@ -368,7 +368,7 @@
       }else{
         $('#id_kecamatan, #id_desa').attr('disabled','');
         $('#id_kecamatan, #id_desa').val('').trigger('change');
-        
+
       }
     });
 

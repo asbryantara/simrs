@@ -38,203 +38,234 @@ $this->load->view('leftbar');
 					</div>
 					<?= form_open(base_url('pasien/save'), ['class' => 'form-horizontal']) ?>
 					<div class="box-body">
-
-						<div class="form-group">
-							<label class="col-sm-2 control-label">No. RM</label>
-
-							<div class="col-sm-4">
-								<input type="text" name="no_rm" class="form-control" id="no_rm" disabled="">
-							</div>
-
-							<label class="col-sm-2 control-label">NIK</label>
-
-							<div class="col-sm-4">
-								<input type="text" name="nik_px" class="form-control" id="nik" placeholder="NIK">
-							</div>
-						</div>
-
-						<div class="form-group">
-							<label class="col-sm-2 control-label">Nama Pasien <small class="text-red">*</small></label>
-
-							<div class="col-sm-4">
-								<input type="text" name="nama_px" class="form-control" id="nama_px" required="">
-							</div>
-
-							<label class="col-sm-2 control-label">Jenis Kelamin <small class="text-red">*</small></label>
-
-							<div class="col-sm-4">
-								<input type="radio" name="jk_px" class="flat-red" value="1" required=""> Laki-laki &nbsp; &nbsp; &nbsp; &nbsp;
-								<input type="radio" name="jk_px" class="flat-red" value="2" required=""> Perempuan
-							</div>
-						</div>
-
-						<div class="form-group">
-							<label class="col-sm-2 control-label">Tempat Lahir <small class="text-red">*</small></label>
-
-							<div class="col-sm-4">
-								<select name="tempat_lahir_px" class="form-control select2" id="tempat_lahir_px" style="width: 100%" required="">
-									<option value="">-- silahkan pilih --</option>
-									<?php foreach ($kota_kab as $kk) : ?>
-										<option><?= str_replace('KABUPATEN ', '', str_replace('KOTA ', '', $kk->nama_kota_kab)) ?></option>
-									<?php endforeach ?>
-								</select>
-							</div>
-
-							<label class="col-sm-2 control-label">Tanggal Lahir <small class="text-red">*</small></label>
-
-							<div class="col-sm-4">
-								<input type="text" name="tgl_lahir_px" class="form-control" id="tgl_lahir_px" data-inputmask="'alias': 'dd/mm/yyyy'" data-mask required="">
-								<small id="umur" style="font-weight: 700;"></small>
-							</div>
-						</div>
-
-						<div class="form-group">
-							<label class="col-sm-2 control-label">Alamat <small class="text-red">*</small></label>
-
-							<div class="col-sm-4">
-								<textarea name="alamat_px" class="form-control" required=""></textarea>
-							</div>
-
-							<label class="col-sm-2 control-label">Provinsi</label>
-
-							<div class="col-sm-4">
-								<select name="id_provinsi" id="id_provinsi" class="form-control select2" style="width:100%;">
-									<option value="">-- pilih provinsi --</option>
-									<?php foreach ($provinsi as $pro) : ?>
-										<option value="<?= $pro->id_provinsi ?>"><?= $pro->nama_provinsi ?></option>
-									<?php endforeach ?>
-								</select>
-							</div>
-						</div>
-
-						<div class="form-group">
-							<label class="col-sm-2 control-label">Kota/Kabupaten</label>
-
-							<div class="col-sm-4">
-								<select name="id_kota_kab" id="id_kota_kab" class="form-control select2" style="width:100%;" disabled=""></select>
-							</div>
-
-							<label class="col-sm-2 control-label">Kecamatan</label>
-
-							<div class="col-sm-4">
-								<select name="id_kecamatan" id="id_kecamatan" class="form-control select2" style="width:100%;" disabled=""></select>
-							</div>
-						</div>
-
-						<div class="form-group">
-							<label class="col-sm-2 control-label">Desa/Kelurahan</label>
-
-							<div class="col-sm-4">
-								<select name="id_desa" id="id_desa" class="form-control select2" style="width:100%;" disabled=""></select>
-							</div>
-
-							<label class="col-sm-2 control-label">Pendidikan Terakhir</label>
-
-							<div class="col-sm-4">
-								<select name="pendidikan_px" class="form-control select2" style="width:100%;">
-									<option value=""> -- pilih pendidikan --</option>
-									<option value="0">Tidak Sekolah</option>
-									<option value="1">SD</option>
-									<option value="2">SMP</option>
-									<option value="3">SMA</option>
-									<option value="4">D-III</option>
-									<option value="5">D-IV / S1</option>
-									<option value="6">S2</option>
-									<option value="7">S3</option>
-								</select>
-							</div>
-						</div>
-
-						<div class="form-group">
-							<label class="col-sm-2 control-label">Pembayaran</label>
-
-							<div class="col-sm-4">
-								<select name="asuransi_px" id="asuransi_px" class="form-control">
-									<option value="1">Umum/Tunai</option>
-									<option value="2">BPJS Kesehatan</option>
-									<option value="3">Asuransi Lain</option>
-								</select>
-							</div>
-
-							<div id="no_asuransi" class="hidden">
-								<label class="col-sm-2 control-label">No. Kartu BPJS</label>
-
-								<div class="col-sm-4">
-									<input type="text" name="no_asuransi_px" class="form-control" autocomplete="off">
+						<div class="col-md-6 col-xl-6 col-sm-6">
+							<div class="form-group">
+								<label class="col-md-4 control-label">No. RM</label>
+								<div class="col-md-8">
+									<input type="text" name="no_rm" class="form-control" id="no_rm" disabled="">
 								</div>
 							</div>
 
-							<div id="nama_asuransi_lain" class="hidden">
-								<label class="col-sm-2 control-label">Nama Asuransi</label>
-
-								<div class="col-sm-4">
-									<input type="text" name="asuransi_lain_px" class="form-control">
+							<div class="form-group">
+								<label class="col-md-4 control-label">Nama Pasien <small class="text-red">*</small></label>
+								<div class="col-md-8">
+									<input type="text" name="nama_px" class="form-control" id="nama_px" required="">
 								</div>
 							</div>
+
+							<div class="form-group">
+								<label class="col-sm-4 control-label">Tempat Lahir <small class="text-red">*</small></label>
+
+								<div class="col-sm-8">
+									<select name="tempat_lahir_px" class="form-control select2" id="tempat_lahir_px" style="width: 100%" required="">
+										<option value="">-- silahkan pilih --</option>
+										<?php foreach ($kota_kab as $kk) : ?>
+											<option><?= str_replace('KABUPATEN ', '', str_replace('KOTA ', '', $kk->nama_kota_kab)) ?></option>
+										<?php endforeach ?>
+									</select>
+								</div>
+							</div>
+
+							<div class="form-group">
+								<label class="col-sm-4 control-label">Alamat <small class="text-red">*</small></label>
+
+								<div class="col-sm-8">
+									<textarea name="alamat_px" class="form-control" required="" style="width: 100%"></textarea>
+								</div>
+							</div>
+
+							<div class="form-group">
+								<label class="col-sm-4 control-label">No. Telp</label>
+								<div class="col-sm-8">
+									<input type="text" name="telp_px" id="telp_px" class="form-control" autocomplete="off">
+								</div>
+							</div>
+
+							<div class="form-group">
+								<label class="col-sm-4 control-label">Pendidikan Terakhir</label>
+
+								<div class="col-sm-8">
+									<select name="pendidikan_px" class="form-control select2" style="width:100%;">
+										<option value=""> -- pilih pendidikan --</option>
+										<option value="0">Tidak Sekolah</option>
+										<option value="1">SD</option>
+										<option value="2">SMP</option>
+										<option value="3">SMA</option>
+										<option value="4">D-III</option>
+										<option value="5">D-IV / S1</option>
+										<option value="6">S2</option>
+										<option value="7">S3</option>
+									</select>
+								</div>
+							</div>
+
+							<div class="form-group">
+								<label class="col-sm-4 control-label">Pekerjaan</label>
+
+								<div class="col-sm-8">
+									<select name="pekerjaan_px" class="form-control">
+										<option value="">-- pilih pekerjaan --</option>
+										<option value="0">Tidak Bekerja</option>
+										<option value="1">Tani</option>
+										<option value="2">PNS</option>
+										<option value="3">TNI / Polri</option>
+										<option value="4">Karyawan</option>
+										<option value="5">Buruh</option>
+										<option value="6">Wirausaha</option>
+									</select>
+								</div>
+							</div>
+
+
+							<div class="form-group">
+								<label class="col-sm-4 control-label">Agama</label>
+
+								<div class="col-sm-8">
+									<select name="agama_px" class="form-control">
+										<option value="">-- pilih agama --</option>
+										<option value="ISLAM">ISLAM</option>
+										<option value="HINDU">HINDU</option>
+										<option value="KRISTEN">KRISTEN</option>
+										<option value="BUDHA">BUDHA</option>
+										<option value="KATHOLIK">KATHOLIK</option>
+										<option value="KHONGHUCU">KHONGHUCU</option>
+									</select>
+								</div>
+							</div>
+
+
+
 						</div>
 
-						<div class="form-group">
-							<label class="col-sm-2 control-label">Pekerjaan</label>
+						<div class="col-md-6 col-xl-6 col-sm-6">
 
-							<div class="col-sm-4">
-								<select name="pekerjaan_px" class="form-control">
-									<option value="">-- pilih pekerjaan --</option>
-									<option value="0">Tidak Bekerja</option>
-									<option value="1">Tani</option>
-									<option value="2">PNS</option>
-									<option value="3">TNI / Polri</option>
-									<option value="4">Karyawan</option>
-									<option value="5">Buruh</option>
-									<option value="6">Wirausaha</option>
-								</select>
+							<div class="form-group">
+								<label class="col-md-4 control-label">NIK</label>
+								<div class="col-md-8">
+									<input type="text" name="nik_px" class="form-control" id="nik" placeholder="NIK">
+								</div>
 							</div>
 
-							<label class="col-sm-2 control-label">No. Telp</label>
-							<div class="col-sm-4">
-								<input type="text" name="telp_px" id="telp_px" class="form-control" autocomplete="off">
+							<div class="form-group">
+								<label class="col-sm-4 control-label">Jenis Kelamin <small class="text-red">*</small></label>
+
+								<div class="col-sm-8">
+									<input type="radio" name="jk_px" class="flat-red" value="1" required=""> Laki-laki &nbsp; &nbsp; &nbsp; &nbsp;
+									<input type="radio" name="jk_px" class="flat-red" value="2" required=""> Perempuan
+								</div>
 							</div>
 
+							<div class="form-group">
+								<label class="col-sm-4 control-label">Tanggal Lahir <small class="text-red">*</small></label>
+
+								<div class="col-sm-8">
+									<input type="text" name="tgl_lahir_px" class="form-control" id="tgl_lahir_px" data-inputmask="'alias': 'dd/mm/yyyy'" data-mask required="">
+									<small id="umur" style="font-weight: 700;"></small>
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-sm-4 control-label">Provinsi</label>
+
+								<div class="col-sm-8">
+									<select name="id_provinsi" id="id_provinsi" class="form-control select2" style="width:100%;">
+										<option value="">-- pilih provinsi --</option>
+										<?php foreach ($provinsi as $pro) : ?>
+											<option value="<?= $pro->id_provinsi ?>"><?= $pro->nama_provinsi ?></option>
+										<?php endforeach ?>
+									</select>
+								</div>
+							</div>
+
+							<div class="form-group">
+								<label class="col-sm-4 control-label">Kota/Kabupaten</label>
+
+								<div class="col-sm-8">
+									<select name="id_kota_kab" id="id_kota_kab" class="form-control select2" style="width:100%;" disabled=""></select>
+								</div>
+							</div>
+
+							<div class="form-group">
+								<label class="col-sm-4 control-label">Kecamatan</label>
+
+								<div class="col-sm-8">
+									<select name="id_kecamatan" id="id_kecamatan" class="form-control select2" style="width:100%;" disabled=""></select>
+								</div>
+							</div>
+
+
+							<div class="form-group">
+								<label class="col-sm-4 control-label">Desa/Kelurahan</label>
+
+								<div class="col-sm-8">
+									<select name="id_desa" id="id_desa" class="form-control select2" style="width:100%;" disabled=""></select>
+								</div>
+							</div>
+
+
+							<div class="form-group">
+								<label class="col-sm-4 control-label">Pembayaran</label>
+
+								<div class="col-sm-8">
+									<select name="asuransi_px" id="asuransi_px" class="form-control">
+										<option value="1">Umum/Tunai</option>
+										<option value="2">BPJS Kesehatan</option>
+										<option value="3">Asuransi Lain</option>
+									</select>
+								</div>
+							</div>
+							<div class="form-group">
+
+								<div id="no_asuransi" class="hidden">
+									<label class="col-sm-4 control-label">No. Kartu BPJS</label>
+
+									<div class="col-sm-8">
+										<input type="text" name="no_asuransi_px" class="form-control" autocomplete="off">
+									</div>
+								</div>
+
+								<div id="nama_asuransi_lain" class="hidden">
+									<label class="col-sm-4 control-label">Nama Asuransi</label>
+
+									<div class="col-sm-8">
+										<input type="text" name="asuransi_lain_px" class="form-control">
+									</div>
+								</div>
+
+							</div>
 						</div>
 
-						<div class="form-group">
-							<label class="col-sm-2 control-label">Agama</label>
 
-							<div class="col-sm-4">
-								<select name="agama_px" class="form-control">
-									<option value="">-- pilih agama --</option>
-									<option value="ISLAM">ISLAM</option>
-									<option value="HINDU">HINDU</option>
-									<option value="KRISTEN">KRISTEN</option>
-									<option value="BUDHA">BUDHA</option>
-									<option value="KATHOLIK">KATHOLIK</option>
-									<option value="KHONGHUCU">KHONGHUCU</option>
-								</select>
-							</div>
 
-							<!-- <label class="col-sm-2 control-label">Alergi</label>
+					</div>
+
+				</div>
+
+
+
+				<!-- <label class="col-sm-2 control-label">Alergi</label>
 							<div class="col-sm-4">
 								<input type="text" name="alergi_px" id="alergi_px" class="form-control" autocomplete="off">
 							</div> -->
 
-						</div>
-
-					</div>
-					<div class="box-footer">
-						<center>
-							<button type="submit" class="btn btn-primary btn-sm">Simpan</button>
-							<button type="reset" class="btn btn-default btn-sm">Reset</button>
-						</center>
-					</div>
-					<?= form_close() ?>
-
-				</div>
 			</div>
 
-			<!-- /.col (RIGHT) -->
 		</div>
-		<!-- /.row -->
-	</section>
-	<!-- /.content -->
+		<div class="box-footer">
+			<center>
+				<button type="submit" class="btn btn-primary btn-sm">Simpan</button>
+				<button type="reset" class="btn btn-default btn-sm">Reset</button>
+			</center>
+		</div>
+		<?= form_close() ?>
+
+</div>
+</div>
+
+<!-- /.col (RIGHT) -->
+</div>
+<!-- /.row -->
+</section>
+<!-- /.content -->
 </div>
 <!-- /.content-wrapper -->
 

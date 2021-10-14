@@ -44,7 +44,7 @@ class Pasien extends CI_Controller {
 		$data['pekerjaan_px']		= $this->input->post('pekerjaan_px');
 		$data['telp_px']			= $this->input->post('telp_px');
 		$data['agama_px']			= $this->input->post('agama_px');
-		$data['alergi_px']			= $this->input->post('alergi_px');
+		// $data['alergi_px']			= $this->input->post('alergi_px');
 
 		$simpan = $this->db->insert('pasien', $data);
 		if($simpan){
@@ -122,7 +122,7 @@ class Pasien extends CI_Controller {
 		  	$result = $this->px->autocomplete($_GET['term']);
 		   	if (count($result) > 0) {
 		    foreach ($result as $row)
-	     		
+
 
 		     	$arr_result[] = array(
 
