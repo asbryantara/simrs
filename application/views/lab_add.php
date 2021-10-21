@@ -1,4 +1,4 @@
-<?php 
+<?php
   $this->load->view('header');
   $this->load->view('leftbar');
 ?>
@@ -21,15 +21,15 @@
             </div>
           <?php endif ?>
         </div>
-        
+
         <div class="col-md-12">
-          
+
           <!-- <a href="<?= base_url('pasien/add') ?>" class="btn btn-info"><i class="fa fa-plus"> </i> Data Pasien Baru</a> -->
           <a href="<?= base_url('penunjang/riwayat_lab') ?>" class="btn btn-primary"><i class="fa fa-eye"> </i> Riwayat Pemeriksaan</a>
-         
+
           <br>
           <br>
-          
+
         </div>
 
         <?= form_open(base_url('penunjang/save_lab'), ['class'=>'form-horizontal']) ?>
@@ -39,14 +39,14 @@
               <h3 class="box-title">Identitas Pasien</h3>
             </div>
               <div class="box-body">
-                
+
                 <div class="form-group">
                   <label class="col-sm-2 control-label">No. RM</label>
 
                   <div class="col-sm-4">
                     <input type="text" name="no_rm" class="form-control" id="no_rm" autofocus="" required="">
                   </div>
-               
+
                   <label class="col-sm-2 control-label">Nama Pasien </label>
 
                   <div class="col-sm-4">
@@ -63,7 +63,7 @@
 
                   <label class="col-sm-2 control-label">Alamat</label>
                   <div class="col-sm-4">
-                    <textarea class="form-control" id="alamat_px" disabled=""></textarea> 
+                    <textarea class="form-control" id="alamat_px" disabled=""></textarea>
                   </div>
                 </div>
 
@@ -74,13 +74,13 @@
                     <input type="text" id="ttl" class="form-control" disabled="">
                     <small id="umur" style="font-weight: 700;"></small>
                   </div>
-                  
+
                    <label class="col-sm-2 control-label">Pembayaran</label>
 
                   <div class="col-sm-4">
                     <input type="text" id="pembayaran" class="form-control" disabled>
                   </div>
-                  
+
                 </div>
 
              </div>
@@ -102,7 +102,7 @@
                   <input type="text" name="kolesterol" id="kolesterol" class="form-control">
                   <small id="res-kol"></small>
                 </div>
-                
+
                  <label class="col-sm-2 control-label">Gula Darah Acak</label>
 
                 <div class="col-sm-4">
@@ -110,7 +110,7 @@
                     <input type="hidden" name="resultGd" id="resultGd" value="0">
                   <small id="res-gda"></small>
                 </div>
-                
+
               </div>
 
               <div class="form-group">
@@ -120,14 +120,14 @@
                   <input type="text" name="gdp" id="gdp" class="form-control">
                   <small id="res-gdp"></small>
                 </div>
-                
+
                  <label class="col-sm-2 control-label">Gula Darah Setelah Makan</label>
 
                 <div class="col-sm-4">
                   <input type="text" name="gdsm" id="gdsm" class="form-control">
                   <small id="res-gdsm"></small>
                 </div>
-                
+
               </div>
 
               <div class="form-group">
@@ -137,14 +137,14 @@
                   <input type="text" name="hb" id="hb" class="form-control">
                   <small id="res-hb"></small>
                 </div>
-                
+
                  <label class="col-sm-2 control-label">Trombosit</label>
 
                 <div class="col-sm-4">
                   <input type="text" name="trombosit" id="trombosit" class="form-control">
                   <small id="res-trombosit"></small>
                 </div>
-                
+
               </div>
 
               <div class="form-group">
@@ -154,14 +154,14 @@
                   <input type="text" name="sgot" id="sgot" class="form-control">
                   <small id="res-sgot"></small>
                 </div>
-                
+
                  <label class="col-sm-2 control-label">SGPT</label>
 
                 <div class="col-sm-4">
                   <input type="text" name="sgpt" id="sgpt" class="form-control">
                   <small id="res-sgpt"></small>
                 </div>
-                
+
               </div>
 
               <div class="form-group">
@@ -171,7 +171,7 @@
                   <input type="text" name="asamurat" id="asamurat" class="form-control">
                   <small id="res-asamurat"></small>
                 </div>
-                
+
                  <label class="col-sm-2 control-label">Widal</label>
 
                 <div class="col-sm-4">
@@ -182,7 +182,7 @@
                   </select>
                   <small id="res-widal"></small>
                 </div>
-                
+
               </div>
 
               <div class="form-group">
@@ -191,16 +191,16 @@
                 <div class="col-sm-4">
                   <textarea name="lain" class="form-control" rows="4"></textarea>
                 </div>
-                
+
                 </div>
-                
+
               </div>
 
 
 
             </div>
 
-            
+
 
 
           </div>
@@ -240,7 +240,7 @@
   $(document).ready(function () {
 
     $('#left_lab').addClass('active');
-    
+
     $('#no_rm').autocomplete({
       source: "<?php echo site_url('penunjang/autocomplete_lab');?>",
 
@@ -261,13 +261,13 @@
            as = 'Umum';
           }
 
-          $('#nama_px').val(ui.item.nama_px); 
-          $('#no_rm').val(ui.item.no_rm); 
-          $('#jk_px').val(jk); 
-          $('#alamat_px').val(ui.item.alamat_px); 
-          $('#pembayaran').val(as); 
-          $('#id_kunjungan').val(ui.item.id_kunjungan); 
-          $('#ttl').val(ui.item.tempat_lahir_px+', '+ui.item.tgl_lahir_px); 
+          $('#nama_px').val(ui.item.nama_px);
+          $('#no_rm').val(ui.item.no_rm);
+          $('#jk_px').val(jk);
+          $('#alamat_px').val(ui.item.alamat_px);
+          $('#pembayaran').val(as);
+          $('#id_kunjungan').val(ui.item.id_kunjungan);
+          $('#ttl').val(ui.item.tempat_lahir_px+', '+ui.item.tgl_lahir_px);
           umur(ui.item.tgl_lahir_px);
         }
     });
@@ -283,7 +283,7 @@
         year = 1;
       }
       var age = today.getFullYear() - birthday.getFullYear() - year;
-   
+
       if(age < 0){
         age = 0;
       }
@@ -295,7 +295,7 @@
       var no_rm = no.substr(0,6);
       $('#no_rm').val(no_rm);
     });
-    
+
 
     // PEMERIKSAAN HOOOO
 
@@ -305,7 +305,7 @@
     =================================================================================
                           KODE
     =================================================================================
-    KATEGORI              1                 2               3                   4 
+    KATEGORI              1                 2               3                   4
     =================================================================================
     TEKANAN DARAH         HYPOTENSI         NORMAL          PREHYPERTENSI       -
     IMT                   KURUS             NORMAL          BERAT BADAN LEBIH   GEMUK
@@ -318,18 +318,18 @@
       checkboxClass: 'icheckbox_flat-blue',
       radioClass   : 'iradio_flat-blue'
     });
-    
+
 
     /*
     =======================================
                   TEKANAN DARAH
     =======================================
-    KATEGORI          SYSTOLE   | DIASTOLE 
+    KATEGORI          SYSTOLE   | DIASTOLE
     =======================================
     hypotensi       = <90       | <60
     normal          = 90 - 120  | 60 - 80
     pre hypertensi  = 120 - 140 | 80 - 90
-    hypertensi      = 140 - 160 | 90 - 100 
+    hypertensi      = 140 - 160 | 90 - 100
     =======================================
     */
 
@@ -342,7 +342,7 @@
     =======================================
     Gula Darah Puasa          = 70 - 110
     Gula Darah Setelah Makan  = 110 - 125
-    Gula Darah Acak           = < 140 
+    Gula Darah Acak           = < 140
     Kolesterol Total          = < 200
     Hemoglobin                = 14,0 - 17,5 [PRIA]
                                 12,3 - 15,3 [WANITA]
@@ -364,20 +364,19 @@
       var hb;
       var hb = $('#hb').val();
       var jk = $('#jk_px').val();
-
       if(hb != ''){
         if(jk == 'Laki-Laki'){
-          if(hb < 14){
+          if(parseInt(hb) < 14){
             hb = 'RISK';
-          }else if(hb <= 17.5){
+          }else if(parseInt(hb) <= 17.5){
             hb = 'Normal';
-          }else if(hb > 17.5){
+          }else if(parseInt(hb) > 17.5){
             hb = 'RISK';
           }
         }else{
-          if(hb < 12.3){
+          if(parseInt(hb) < 12.3){
             hb = 'RISK';
-          }else if(hb > 15.3){
+          }else if(parseInt(hb) > 15.3){
             hb = 'RISK';
           }
         }
@@ -765,15 +764,15 @@
     Tekanan Darah         >140/90               120-139/80-89           <120/80
     Kebiasaan Merokok     Perokok               Kadang-kadang merokok   Tidak Merokok
     Cholesterol           >240                  200-239                 <200
-    Diabetes              Ya                    Ada riwayat keluarga    Tidak 
+    Diabetes              Ya                    Ada riwayat keluarga    Tidak
     Aktivitas fisik       Malas                 Kadang-kadang           Teratur
     Berat Badan           Gemuk                 Sedikit Gemuk           Normal
-    Riwayat Keluarga      Ya                    Tidak yakin             Tidak   
+    Riwayat Keluarga      Ya                    Tidak yakin             Tidak
     -----------------------------------------------------------------------------------
     JIKA JUMLAH           >=3                   4-6                     6-8
     */
 
-    
+
 
   });
 </script>

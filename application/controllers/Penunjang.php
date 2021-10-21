@@ -8,7 +8,12 @@ class Penunjang extends CI_Controller {
 	}
 
 	public function lab(){
-		$this->load->view('lab');
+		$data['pendaftaran'] = $this->klinik->riwayat_lab()->result();
+		$this->load->view('lab_index', $data);
+	}
+
+	public function addLab(){
+		$this->load->view('lab_add');
 	}
 
 	public function rad(){
@@ -20,7 +25,7 @@ class Penunjang extends CI_Controller {
 		  	$result = $this->klinik->autocomplete_lab($_GET['term']);
 		   	if (count($result) > 0) {
 		    foreach ($result as $row)
-	     		
+
 
 		     	$arr_result[] = array(
 
@@ -47,7 +52,7 @@ class Penunjang extends CI_Controller {
 		  	$result = $this->klinik->autocomplete_rad($_GET['term']);
 		   	if (count($result) > 0) {
 		    foreach ($result as $row)
-	     		
+
 
 		     	$arr_result[] = array(
 
