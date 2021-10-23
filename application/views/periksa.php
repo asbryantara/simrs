@@ -22,15 +22,18 @@ $this->load->view('leftbar');
 				<?php endif ?>
 			</div>
 
-			<div class="col-md-12">
+			<div class="col-md-12 form-group">
 
 				<!-- <a href="<?= base_url('pasien/add') ?>" class="btn btn-primary"><i class="fa fa-plus"> </i> Data Pasien Baru</a> -->
 				<!-- <a href="<?= base_url('pendaftaran/list_pendaftaran') ?>" class="btn btn-primary"><i class="fa fa-eye"> </i> Lihat Pendaftaran</a> -->
-				<a href="<?= base_url('klinik/pengantar_lab/' . $this->uri->segment(3)) ?>" target="_blank" class="btn btn-primary"><i class="fa fa-envelope"> </i> Buat Pengantar Lab</a>
-				<a href="<?= base_url('klinik/pengantar_rad/' . $this->uri->segment(3)) ?>" target="_blank" class="btn btn-primary"><i class="fa fa-envelope"> </i> Buat Pengantar Radiologi</a>
 
-				<br>
-				<br>
+				<?php if ($kunj['is_lab'] != 1) : ?>
+					<button id="lab-show" class="btn btn-primary"><i class="fa fa-envelope"> </i> Buat Pengantar Lab</button>
+				<?php endif ?>
+
+				<?php if ($kunj['is_rad'] != 1) : ?>
+					<a href="<?= base_url('klinik/pengantar_rad/' . $this->uri->segment(3)) ?>" target="_blank" class="btn btn-primary"><i class="fa fa-envelope"> </i> Buat Pengantar Radiologi</a>
+				<?php endif ?>
 
 			</div>
 
@@ -104,6 +107,49 @@ $this->load->view('leftbar');
 
 				</div>
 				<!--- // BOX -->
+
+
+				<div class="box box-warning">
+					<div class="box-header with-border">
+						<h3 class="box-title"><i class="fa fa-pencil"> </i> Riwayat Kunjungan Pasien</h3>
+					</div>
+					<div class="box-body">
+						<table class="table table-hover table-striped table-bordered">
+							<thead>
+								<tr>
+									<th>Tanggal Daftar</th>
+									<th>Waktu Daftar</th>
+									<th>Anamnesa</th>
+									<th>Status</th>
+									<th>Petugas</th>
+									<th>#</th>
+								</tr>
+							</thead>
+							<tbody>
+								<?php if (empty($riwayat)) {
+									echo "<td>Tidak ada Riwayat</td>";
+								} else {
+
+									foreach ($riwayat as $p) : ?>
+										<tr>
+											<td><?= $p->tgl_kunjungan ?></td>
+											<td><?= $p->waktu_kunjungan ?></td>
+											<td><?= $p->anamnesa ?></td>
+											<td>
+												<?php if ($p->status_kunjungan ==  4) {
+													echo 'Selesai';
+												}
+												?>
+											</td>
+											<td><?= $p->nama_user ?></td>
+											<td><a href="<?= base_url('pendaftaran/detail/' . $p->id_kunjungan) ?>" class="btn btn-primary btn-xs"><i class="fa fa-eye"></i></a></td>
+										</tr>
+								<?php endforeach;
+								} ?>
+							</tbody>
+						</table>
+					</div>
+				</div>
 
 				<div class="box box-primary">
 					<div class="box-header with-border">
@@ -204,7 +250,7 @@ $this->load->view('leftbar');
 					</div>
 				</div>
 
-
+				<!-- Cek Jika ada Lab -->
 				<div class="box box-primary <?php if ($kunj['id_lab'] == null) {
 												echo 'hidden';
 											} ?>" id="lab">
@@ -214,22 +260,22 @@ $this->load->view('leftbar');
 																					echo '1';
 																				} else {
 																					echo '0';
-																				} ?>">
+																				} ?>" disabled>
 					</div>
 					<div class="box-body">
 						<div class="form-group">
 							<label class="col-sm-2 control-label">Kolesterol</label>
 
 							<div class="col-sm-4">
-								<input type="text" name="kolesterol" id="kolesterol" class="form-control" value="<?= $kunj['kolesterol'] ?>">
+								<input type="text" name="kolesterol" id="kolesterol" class="form-control" value="<?= $kunj['kolesterol'] ?>" disabled>
 								<small id="res-kol"></small>
 							</div>
 
 							<label class="col-sm-2 control-label">Gula Darah Acak</label>
 
 							<div class="col-sm-4">
-								<input type="text" name="gda" id="gda" class="form-control" value="<?= $kunj['gda'] ?>">
-								<input type="hidden" name="resultGd" id="resultGd" value="<?= $kunj['gd'] ?>">
+								<input type="text" name="gda" id="gda" class="form-control" value="<?= $kunj['gda'] ?>" disabled>
+								<input type="hidden" name="resultGd" id="resultGd" value="<?= $kunj['gd'] ?>" disabled>
 								<small id="res-gda"></small>
 							</div>
 
@@ -239,14 +285,14 @@ $this->load->view('leftbar');
 							<label class="col-sm-2 control-label">Gula Darah Puasa</label>
 
 							<div class="col-sm-4">
-								<input type="text" name="gdp" id="gdp" class="form-control" value="<?= $kunj['gdp'] ?>">
+								<input type="text" name="gdp" id="gdp" class="form-control" value="<?= $kunj['gdp'] ?>" disabled>
 								<small id="res-gdp"></small>
 							</div>
 
 							<label class="col-sm-2 control-label">Gula Darah Setelah Makan</label>
 
 							<div class="col-sm-4">
-								<input type="text" name="gdsm" id="gdsm" class="form-control" value="<?= $kunj['gdsm'] ?>">
+								<input type="text" name="gdsm" id="gdsm" class="form-control" value="<?= $kunj['gdsm'] ?>" disabled>
 								<small id="res-gdsm"></small>
 							</div>
 
@@ -256,14 +302,14 @@ $this->load->view('leftbar');
 							<label class="col-sm-2 control-label">Hemogloin</label>
 
 							<div class="col-sm-4">
-								<input type="text" name="hb" id="hb" value="<?= $kunj['hb'] ?>" class="form-control">
+								<input type="text" name="hb" id="hb" value="<?= $kunj['hb'] ?>" class="form-control" disabled>
 								<small id="res-hb"></small>
 							</div>
 
 							<label class="col-sm-2 control-label">Trombosit</label>
 
 							<div class="col-sm-4">
-								<input type="text" name="trombosit" id="trombosit" value="<?= $kunj['trombosit'] ?>" class="form-control">
+								<input type="text" name="trombosit" id="trombosit" value="<?= $kunj['trombosit'] ?>" class="form-control" disabled>
 								<small id="res-trombosit"></small>
 							</div>
 
@@ -273,14 +319,14 @@ $this->load->view('leftbar');
 							<label class="col-sm-2 control-label">SGOT</label>
 
 							<div class="col-sm-4">
-								<input type="text" name="sgot" id="sgot" value="<?= $kunj['sgot'] ?>" class="form-control">
+								<input type="text" name="sgot" id="sgot" value="<?= $kunj['sgot'] ?>" class="form-control" disabled>
 								<small id="res-sgot"></small>
 							</div>
 
 							<label class="col-sm-2 control-label">SGPT</label>
 
 							<div class="col-sm-4">
-								<input type="text" name="sgpt" id="sgpt" value="<?= $kunj['sgpt'] ?>" class="form-control">
+								<input type="text" name="sgpt" id="sgpt" value="<?= $kunj['sgpt'] ?>" class="form-control" disabled>
 								<small id="res-sgpt"></small>
 							</div>
 
@@ -290,14 +336,14 @@ $this->load->view('leftbar');
 							<label class="col-sm-2 control-label">Asam Urat</label>
 
 							<div class="col-sm-4">
-								<input type="text" name="asamurat" id="asamurat" value="<?= $kunj['asamurat'] ?>" class="form-control">
+								<input type="text" name="asamurat" id="asamurat" value="<?= $kunj['asamurat'] ?>" class="form-control" disabled>
 								<small id="res-asamurat"></small>
 							</div>
 
 							<label class="col-sm-2 control-label">Widal</label>
 
 							<div class="col-sm-4">
-								<select name="widal" id="widal" class="form-control">
+								<select name="widal" id="widal" class="form-control" disabled>
 									<option value="" <?php if ($kunj['widal'] == '') {
 															echo 'selected';
 														} ?>>-- pilih --</option>
@@ -317,7 +363,7 @@ $this->load->view('leftbar');
 							<label class="col-sm-2 control-label">Pemeriksaan Lainnya</label>
 
 							<div class="col-sm-4">
-								<textarea name="lain" class="form-control" rows="4"><?= $kunj['lain'] ?></textarea>
+								<textarea disabled name="lain" class="form-control" rows="4"><?= $kunj['lain'] ?></textarea>
 							</div>
 
 						</div>
@@ -341,14 +387,14 @@ $this->load->view('leftbar');
 																					echo '1';
 																				} else {
 																					echo '0';
-																				} ?>">
+																				} ?>" disabled>
 					</div>
 					<div class="box-body">
 						<div class="form-group">
 							<label class="col-sm-2 control-label">Jenis Pemeriksaan</label>
 
 							<div class="col-sm-4">
-								<select name="jenis_pemeriksaan" class="form-control">
+								<select name="jenis_pemeriksaan" class="form-control" disabled>
 									<option <?php if ($kunj['jenis_pemeriksaan'] == 'X-Ray Umum') {
 												echo 'selected';
 											} ?>>X-Ray Umum</option>
@@ -373,7 +419,7 @@ $this->load->view('leftbar');
 							<label class="col-sm-2 control-label">Hasil Pemeriksaan Radiologi</label>
 
 							<div class="col-sm-4">
-								<textarea class="form-control" name="hasil" id="hasilRad" rows="4"><?= $kunj['hasil'] ?></textarea>
+								<textarea class="form-control" name="hasil" id="hasilRad" rows="4" disabled><?= $kunj['hasil'] ?></textarea>
 
 							</div>
 
@@ -637,6 +683,111 @@ $this->load->view('leftbar');
 <!-- /.content-wrapper -->
 
 
+<div class="modal fade bd-example-modal-lg modal-lab" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+	<div class="modal-dialog modal-lg">
+		<?= form_open('klinik/kirimPasienLab', ['class' => 'form-horizontal']) ?>
+		<div class="modal-content">
+			<div class="modal-header">
+				<h3 class="modal-title">Pilih Laboratorium</h3>
+			</div>
+			<div class="modal-body">
+				<h4 style="color:red">
+					Kirim pasien ke Laboratorium
+				</h4>
+				<div class="row">
+
+					<input type="hidden" name="id_kunjungan" value="<?= $kunj['id_kunjungan'] ?>">
+					<div class="col-lg-6">
+						<div class="form-group">
+							<label class="control-label col-md-7" style="text-align:left">Kolesterol</label>
+							<div class="col-md-4 input-group">
+								<input type="checkbox" name="kolesterol" class="flat-red" value="1">
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="control-label col-md-7" style="text-align:left">Gula Darah Puasa</label>
+							<div class="col-md-4 input-group">
+								<input type="checkbox" name="gdpuasa" class="flat-red" value="1">
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="control-label col-md-7" style="text-align:left">Gula Darah 2 Jam Setelah Makan</label>
+							<div class="col-md-4 input-group">
+								<input type="checkbox" name="gdmakan" class="flat-red" value="1">
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="control-label col-md-7" style="text-align:left">Gula Darah Acak</label>
+							<div class="col-md-4 input-group">
+								<input type="checkbox" name="gdacak" class="flat-red" value="1">
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="control-label col-md-7" style="text-align:left">Hemoglobin</label>
+							<div class="col-md-4 input-group">
+								<input type="checkbox" name="hemo" class="flat-red" value="1">
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="control-label col-md-7" style="text-align:left">Trombosit</label>
+							<div class="col-md-4 input-group">
+								<input type="checkbox" name="trombo" class="flat-red" value="1">
+							</div>
+						</div>
+					</div>
+					<div class="col-lg-6">
+
+						<div class="form-group">
+							<label class="control-label col-md-6" style="text-align:left">SGOT</label>
+							<div class="col-md-4 input-group">
+								<input type="checkbox" name="sgot" class="flat-red" value="1">
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="control-label col-md-6" style="text-align:left">SGPT</label>
+							<div class="col-md-4 input-group">
+								<input type="checkbox" name="sgpt" class="flat-red" value="1">
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="control-label col-md-6" style="text-align:left">Asam Urat</label>
+							<div class="col-md-4 input-group">
+								<input type="checkbox" name="asamurat" class="flat-red" value="1">
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="control-label col-md-6" style="text-align:left">Widal</label>
+							<div class="col-md-4 input-group">
+								<input type="checkbox" name="widal" class="flat-red" value="1">
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="control-label col-md-6" style="text-align:left">Lainnya</label>
+							<div class="col-md-4 input-group">
+								<input type="checkbox" name="lain" class="flat-red" value="1">
+							</div>
+						</div>
+					</div>
+
+				</div>
+
+				<div class="form-group">
+					<label class="control-label col-md-2" style="text-align:left">Keterangan</label>
+					<div class="col-md-8 input-group">
+						<textarea name="ket_lab" placeholder="Beri keterangan untuk petugas Laboratorium..." rows="4" cols="50" required></textarea>
+					</div>
+				</div>
+			</div>
+			<div class="modal-footer">
+				<center>
+					<button type="submit" class="btn btn-primary btn-sm">Kirim</button>
+					<button type="button" class="btn btn-danger btn-sm" data-dismiss="modal">Tutup</button>
+				</center>
+			</div>
+		</div>
+		<?= form_close() ?>
+	</div>
+</div>
 <?php $this->load->view('footer') ?>
 
 <script>
@@ -669,6 +820,14 @@ $this->load->view('leftbar');
 		actasamurat(p);
 		var q = widal();
 		actwidal(q);
+
+
+		$('#lab-show').on('click', function() {
+			$('.modal-lab').modal('show');
+		});
+		$('#rad-show').on('click', function() {
+			$('.modal-rad').modal('show');
+		});
 
 
 		$('#diagnosa1').autocomplete({

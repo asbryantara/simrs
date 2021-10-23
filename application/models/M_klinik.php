@@ -1,4 +1,4 @@
-<?php 
+<?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 class M_klinik extends CI_Model
@@ -14,6 +14,7 @@ class M_klinik extends CI_Model
     	$this->db->from('kunjungan');
     	$this->db->join('pasien', 'pasien.no_rm=kunjungan.no_rm');
     	$this->db->where('status_kunjungan <=', 1);
+    	$this->db->or_where('status_kunjungan >=', 5);
     	$this->db->order_by('id_kunjungan', 'DESC');
     	return $this->db->get();
     }
@@ -55,6 +56,15 @@ class M_klinik extends CI_Model
         $this->db->like('pasien.no_rm', $term , 'both');
         $this->db->limit('10');
         return $this->db->get()->result();
+    }
+
+    function periksa_lab(){
+        $this->db->select('*');
+        $this->db->from('kunjungan');
+        $this->db->join('pasien', 'kunjungan.no_rm=pasien.no_rm');
+        $this->db->where('status_kunjungan', '5');
+        $this->db->where('is_lab', '1');
+        return $this->db->get();
     }
 
     function riwayat_lab(){

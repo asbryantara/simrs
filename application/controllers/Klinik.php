@@ -30,6 +30,7 @@ class Klinik extends CI_Controller
 		$data['tx'] = $this->db->get('master_tindakan')->result();
 		$data['dx'] = $this->db->get('master_diagnosa')->result();
 		$data['obat'] = $this->db->get('obat')->result();
+		$data['riwayat'] = $this->daftar->riwayatPeriksa($data['kunj']['no_rm'])->result();
 		$this->load->view('periksa', $data);
 	}
 
@@ -168,6 +169,17 @@ class Klinik extends CI_Controller
 		if ($del) {
 			echo json_encode(1);
 		}
+	}
+
+	function kirimPasienLab()
+	{
+
+		$data['is_lab'] = 1;
+		$data['status_kunjungan'] = 5;
+		$data['ket_lab'] = $this->input->post('ket_lab');
+		$id = $this->input->post('id_kunjungan');
+		$this->db->update('kunjungan', $data, ['id_kunjungan' => $id]);
+		redirect(base_url('klinik'));
 	}
 
 	function save()

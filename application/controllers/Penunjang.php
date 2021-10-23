@@ -5,15 +5,18 @@ class Penunjang extends CI_Controller {
 	public function __construct(){
 		parent::__construct();
 		$this->load->model('M_klinik', 'klinik');
+		$this->load->model('M_pendaftaran', 'daftar');
 	}
 
 	public function lab(){
-		$data['pendaftaran'] = $this->klinik->riwayat_lab()->result();
+		$data['data'] = $this->klinik->periksa_lab()->result();
 		$this->load->view('lab_index', $data);
 	}
 
 	public function addLab(){
-		$this->load->view('lab_add');
+		$id = $this->uri->segment(3);
+		$data['pasien'] = $this->daftar->detail($id)->row_array();
+		$this->load->view('lab_add' ,$data);
 	}
 
 	public function rad(){
@@ -76,29 +79,20 @@ class Penunjang extends CI_Controller {
 
 	function save_lab(){
 		$id = $this->input->post('id_kunjungan');
-		$data['kolesterol'] = $this->input->post('kolesterol');
+		$data = $this->input->post();
 		$data['id_user'] = $this->session->userdata('id_user');
-		$data['gda'] = $this->input->post('gda');
-		$data['gdp'] = $this->input->post('gdp');
-		$data['gdsm'] = $this->input->post('gdsm');
 		$data['gd'] = $this->input->post('resultGd');
-		$data['hb'] = $this->input->post('hb');
-		$data['trombosit'] = $this->input->post('trombosit');
-		$data['sgot'] = $this->input->post('sgot');
-		$data['sgpt'] = $this->input->post('sgpt');
-		$data['asamurat'] = $this->input->post('asamurat');
-		$data['widal'] = $this->input->post('widal');
-		$data['lain'] = $this->input->post('lain');
 		$data['jenis_lab'] = 1;
-
+		unset($data['no_rm'],$data['id_kunjungan'],$data['dataLab'],$data['resultGd']);
+		$this->db->trans_start();
 		$this->db->insert('lab', $data);
 
 		$this->db->order_by('id_lab', 'DESC');
 		$this->db->limit('1');
 		$cek = $this->db->get('lab')->row_array();
-
-		$update = $this->db->update('kunjungan', ['id_lab'=>$cek['id_lab']], ['id_kunjungan'=>$id]);
+		$update = $this->db->update('kunjungan', ['id_lab'=>$cek['id_lab'],'status_kunjungan'=>1], ['id_kunjungan'=>$id]);
 		if($update){
+			$this->db->trans_complete();
 			$this->session->set_flashdata('success', 'Berhasil menambahkan data lab');
 			redirect(base_url('penunjang/lab'));
 

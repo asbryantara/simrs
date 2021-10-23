@@ -1,4 +1,4 @@
-<?php 
+<?php
   $this->load->view('header');
   $this->load->view('leftbar');
 ?>
@@ -21,15 +21,15 @@
             </div>
           <?php endif ?>
         </div>
-        
+
        <div class="col-md-12">
-          
+
           <a href="<?= base_url('klinik/sudah_periksa') ?>" class="btn btn-primary"><i class="fa fa-eye"> </i> Sudah Diperiksa</a>
           <!-- <a href="<?= base_url('pendaftaran/list_pendaftaran') ?>" class="btn btn-primary"><i class="fa fa-eye"> </i> Lihat Pendaftaran</a> -->
-         
+
           <br>
           <br>
-          
+
         </div>
 
         <div class="col-md-12">
@@ -61,7 +61,7 @@
                     <td><?= $p->anamnesa ?></td>
                     <td><?php if($p->asuransi_px ==  1){echo 'Umum';}elseif($p->asuransi_px ==  2){echo 'BPJS';}else{echo $p->asuransi_lain_px;} ?></td>
                     <td>
-                      <?php 
+                      <?php
                         if($p->status_kunjungan ==  0){
                           echo 'Menunggu';
                         }elseif($p->status_kunjungan ==  1){
@@ -72,12 +72,21 @@
                           echo 'Menunggu Pembayaran';
                         }elseif($p->status_kunjungan ==  4){
                           echo 'Selesai';
+                        }elseif($p->status_kunjungan ==  5){
+                          echo 'Transfer Lab';
+                        }elseif($p->status_kunjungan ==  6){
+                          echo 'Transfer Radiologi';
                         }
                       ?>
                     </td>
                     <td>
+
+										<?php
+                        if($p->status_kunjungan != 5 && $p->status_kunjungan != 6 ){ ?>
                       <a href="<?= base_url('klinik/periksa/'.$p->id_kunjungan) ?>" class="btn btn-primary btn-xs"><i class="fa fa-stethoscope"> </i> Periksa</a>
-                    </td>
+											<?php }?>
+
+										</td>
                   </tr>
                 <?php endforeach ?>
               </tbody>
@@ -85,7 +94,7 @@
           </div>
         </div>
 
-        
+
 
         </div>
         <!-- /.col (RIGHT) -->
@@ -109,8 +118,8 @@
   $(document).ready(function () {
 
     $('#klinik').addClass('active');
-   
-    
+
+
 
   });
 </script>

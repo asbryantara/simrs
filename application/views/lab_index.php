@@ -24,7 +24,7 @@ $this->load->view('leftbar');
 
 			<div class="col-md-12">
 
-				<a href="<?= base_url('penunjang/lab') ?>" class="btn btn-primary"><i class="fa fa-arrow-left"> </i> Kembali</a>
+				<a href="<?= base_url('penunjang/riwayat_lab') ?>" class="btn btn-primary"><i class="fa fa-eye"> </i> Sudah Diperiksa</a>
 				<!-- <a href="<?= base_url('pendaftaran/list_pendaftaran') ?>" class="btn btn-primary"><i class="fa fa-eye"> </i> Lihat Pendaftaran</a> -->
 
 				<br>
@@ -35,7 +35,7 @@ $this->load->view('leftbar');
 			<div class="col-md-12">
 				<div class="box box-primary">
 					<div class="box-header">
-						<h3 class="box-title">Riwayat Hasil Pemeriksaan Lab</h3>
+						<h3 class="box-title">Daftar Pasien Belum Diperiksa</h3>
 					</div>
 					<div class="box-body">
 						<table class="table table-hover table-striped table-bordered" id="example1">
@@ -45,54 +45,42 @@ $this->load->view('leftbar');
 									<th>Nama</th>
 									<th>JK</th>
 									<th>Tgl Daftar</th>
-									<th>Kolesterol</th>
-									<th>GDA</th>
-									<th>GD2PP</th>
-									<th>GDP</th>
-									<!-- <th>Pembayaran</th> -->
+									<th>Anamnesa</th>
 									<th>Status</th>
-									<th width="50">#</th>
 								</tr>
 							</thead>
 							<tbody>
-								<?php foreach ($pendaftaran as $p) : ?>
+								<?php foreach ($data as $p) : ?>
 									<tr>
 										<td><?= $p->no_rm ?></td>
 										<td><?= $p->nama_px ?></td>
 										<td><?php if ($p->jk_px ==  1) {
-													echo 'L';
-												} else {
-													echo 'P';
-												} ?></td>
+												echo 'L';
+											} else {
+												echo 'P';
+											} ?></td>
 										<td><?= $p->tgl_kunjungan . ' ' . $p->waktu_kunjungan ?></td>
-										<td><?= $p->kolesterol ?></td>
-										<td><?= $p->gda ?></td>
-										<td><?= $p->gdsm ?></td>
-										<td><?= $p->gdp ?></td>
-										<!-- <td><?php if ($p->asuransi_px ==  1) {
-																echo 'Umum';
-															} elseif ($p->asuransi_px ==  2) {
-																echo 'BPJS';
-															} else {
-																echo $p->asuransi_lain_px;
-															} ?></td> -->
-										<td>
-											<?php
-											if ($p->status_kunjungan ==  0) {
-												echo 'Menunggu';
-											} elseif ($p->status_kunjungan ==  1) {
-												echo 'Diperiksa';
-											} elseif ($p->status_kunjungan ==  2) {
-												echo 'Menunggu Obat';
-											} elseif ($p->status_kunjungan ==  3) {
-												echo 'Menunggu Pembayaran';
-											} elseif ($p->status_kunjungan ==  4) {
-												echo 'Selesai';
-											}
-											?>
+										<td><?= $p->anamnesa ?></td>
+										<?php
+										if ($p->status_kunjungan ==  0) {
+											echo 'Menunggu';
+										} elseif ($p->status_kunjungan ==  1) {
+											echo 'Diperiksa';
+										} elseif ($p->status_kunjungan ==  2) {
+											echo 'Menunggu Obat';
+										} elseif ($p->status_kunjungan ==  3) {
+											echo 'Menunggu Pembayaran';
+										} elseif ($p->status_kunjungan ==  4) {
+											echo 'Selesai';
+										} elseif ($p->status_kunjungan ==  5) {
+											echo 'Transfer Lab';
+										} elseif ($p->status_kunjungan ==  6) {
+											echo 'Transfer Radiologi';
+										}
+										?>
 										</td>
 										<td>
-											<a href="<?= base_url('penunjang/edit_lab/' . $p->id_lab . '/' . $p->status_kunjungan) ?>" class="btn btn-warning btn-xs"><i class="fa fa-pencil"> </i> Edit</a>
+											<a href="<?= base_url('penunjang/addLab/' . $p->id_kunjungan) ?>" class="btn btn-primary btn-xs"><i class="fa fa-stethoscope"> </i> Periksa</a>
 										</td>
 									</tr>
 								<?php endforeach ?>

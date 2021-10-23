@@ -1,9 +1,9 @@
-<?php 
+<?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 class M_pendaftaran extends CI_Model
 {
-	
+
   	function autocomplete($term){
       $this->db->like('no_rm', $term , 'both');
       $this->db->or_like('nama_px', $term , 'both');
@@ -15,7 +15,7 @@ class M_pendaftaran extends CI_Model
     	$this->db->select('*');
     	$this->db->from('kunjungan');
     	$this->db->join('pasien', 'pasien.no_rm=kunjungan.no_rm');
-    	// $this->db->where('status_kunjungan', 0);
+    	$this->db->where('status_kunjungan', 0);
     	$this->db->order_by('id_kunjungan', 'DESC');
     	return $this->db->get();
     }
@@ -25,6 +25,16 @@ class M_pendaftaran extends CI_Model
       $this->db->from('kunjungan');
       $this->db->join('user', 'user.id_user=kunjungan.id_user', 'left');
       $this->db->where('kunjungan.no_rm', $no_rm);
+      $this->db->order_by('tgl_kunjungan', 'DESC');
+      return $this->db->get();
+    }
+
+    function riwayatPeriksa($no_rm){
+      $this->db->select('*');
+      $this->db->from('kunjungan');
+      $this->db->join('user', 'user.id_user=kunjungan.id_user', 'left');
+      $this->db->where('kunjungan.no_rm', $no_rm);
+      $this->db->where('status_kunjungan', 4);
       $this->db->order_by('tgl_kunjungan', 'DESC');
       return $this->db->get();
     }
