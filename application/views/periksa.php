@@ -177,7 +177,7 @@ $this->load->view('leftbar');
 
 							<label class="col-sm-2 control-label">Alergi</label>
 							<div class="col-sm-10">
-								<input type="text" name="alergi_obat" id="alergi_obat" value="<?= $kunj['alergi_px'] ?>" class="form-control text-red" autocomplete="off">
+								<input type="text" name="alergi_obat" id="alergi_obat" value="<?= $kunj['alergi_px'] ?>, " class="form-control text-red" autocomplete="off">
 							</div>
 						</div>
 						<div class="form-group">
@@ -1100,36 +1100,66 @@ $this->load->view('leftbar');
 		function extractLast(term) {
 			return split(term).pop();
 		}
-		$("#alergi_obat")
-			// don't navigate away from the field on tab when selecting an item
+		// $("#alergi_obat")
+		// 	// don't navigate away from the field on tab when selecting an item
 
-			.autocomplete({
-				minLength: 0,
-				// source: function(request, response) {
-				// 	// delegate back to autocomplete, but extract the last term
-				// 	response($.ui.autocomplete.filter(
-				// 		availableTags, extractLast(request.term)));
-				// },
-				source: "<?php echo site_url('pasien/alergi'); ?>",
+		// 	.autocomplete({
+		// 		minLength: 0,
+		// 		// source: function(request, response) {
+		// 		// 	// delegate back to autocomplete, but extract the last term
+		// 		// 	response($.ui.autocomplete.filter(
+		// 		// 		availableTags, extractLast(request.term)));
+		// 		// },
+		// 		source: "<?php echo site_url('pasien/alergi'); ?>",
 
-				focus: function() {
-					// prevent value inserted on focus
-					return false;
-				},
-				select: function(event, ui) {
-					var terms = split(this.value);
-					// remove the current input
-					terms.pop();
-					// add the selected item
-					terms.push(ui.item.value);
-					// add placeholder to get the comma-and-space at the end
-					terms.push("");
-					this.value = terms.join(", ");
-					return false;
-				}
-			});
+		// 		focus: function() {
+		// 			// prevent value inserted on focus
+		// 			return false;
+		// 		},
+		// 		select: function(event, ui) {
+		// 			var terms = split(this.value);
+		// 			// remove the current input
+		// 			terms.pop();
+		// 			// add the selected item
+		// 			terms.push(ui.item.value);
+		// 			// add placeholder to get the comma-and-space at the end
+		// 			terms.push("");
+		// 			this.value = terms.join(", ");
+		// 			return false;
+		// 		}
+		// 	});
 
 
+		$("#alergi_obat").autocomplete({
+			source: function(request, response) {
+
+				var searchText = extractLast(request.term);
+				$.ajax({
+					url: "<?php echo site_url('pasien/alergi'); ?>",
+					type: 'post',
+					dataType: "json",
+					data: {
+						search: searchText
+					},
+					success: function(data) {
+						response(data);
+					}
+				});
+			},
+			select: function(event, ui) {
+				var terms = split($('#alergi_obat').val());
+
+				terms.pop();
+
+				terms.push(ui.item.label);
+
+				terms.push("");
+				$('#alergi_obat').val(terms.join(", "));
+
+				return false;
+			}
+
+		});
 		$('#no_rm').on('change', function() {
 			var no = $('#no_rm').val();
 			var no_rm = no.substr(0, 6);

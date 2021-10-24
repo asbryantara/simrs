@@ -118,8 +118,8 @@ class Pasien extends CI_Controller {
 	}
 
 	function alergi(){
-		if (isset($_GET['term'])) {
-		  	$result = $this->px->autocomplete($_GET['term']);
+			  if (isset($_POST['search'])) {
+		  	$result = $this->px->autocomplete($_POST['search']);
 		   	if (count($result) > 0) {
 		    foreach ($result as $row)
 
