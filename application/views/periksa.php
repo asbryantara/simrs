@@ -2,6 +2,22 @@
 $this->load->view('header');
 $this->load->view('leftbar');
 ?>
+<style>
+	.input-group-pulang {
+		display: inline-table;
+		vertical-align: middle;
+		padding: 5px;
+	}
+
+	.input-group-pulang >label {
+		margin: 5px;
+	}
+
+	.form-control:disabled,
+	.form-control:read-only {
+		background-color: #ccc;
+	}
+</style>
 
 <div class="content-wrapper">
 	<!-- Main content -->
@@ -585,93 +601,166 @@ $this->load->view('leftbar');
 					</div>
 				</div>
 
-				<div class="box box-primary hidden" id="rx">
+				<div class="box box-primary" id="tx">
 					<div class="box-header with-border">
-						<h3 class="box-title">Resep</h3>
+						<h3 class="box-title">Cara Pulang</h3>
 					</div>
 					<div class="box-body">
-						<div class="col-md-4">
-							<label>Nama Obat</label>
-							<select name="id_obat" class="form-control select2" id="id_obat" style="width: 100%">
-								<option value="">--pilih obat--</option>
-								<?php foreach ($obat as $o) : ?>
-									<option value="<?= $o->id_obat ?>"><?= $o->nama_obat ?></option>
-								<?php endforeach ?>
-							</select>
-							<small id="res-alergi"></small>
+						<div class="col-lg-12">
 
+							<div class="input-group-pulang">
+								<input id="1" type="radio" name="cara_pulang" value="a">
+								<label for="1">Sembuh</label>
+							</div>
+							<div class="input-group-pulang">
+								<input id="2" type="radio" name="cara_pulang" value="b">
+								<label for="2">Dirujuk</label>
+							</div>
+							<div class="input-group-pulang">
+								<input id="3" type="radio" name="cara_pulang" value="c">
+								<label for="3">Kontrol</label>
+							</div>
+							<div class="input-group-pulang">
+								<input id="rawatInap" type="radio" name="cara_pulang" value="d">
+								<label for="rawatInap">Rawat Inap</label>
+							</div>
 						</div>
 
-						<div class="col-md-2">
-							<label>Jumlah</label>
-							<input type="number" name="jumlah" id="jumlah" min="0" class="form-control">
-						</div>
+						<div class="col-lg-12" style="margin-top:10px;" id="rencanaInap">
+							<label class="col-sm-3 control-label">Rencana Asuhan Rawat Inap :</label>
+							<div class="col-sm-8">
 
-						<div class="col-md-3">
-							<label>Aturan Pakai</label>
-							<input type="text" name="aturan_pakai" id="aturan_pakai" class="form-control">
-						</div>
-
-
-						<div class="col-md-1">
-							<button type="button" id="addResep" class="btn btn-success btn-xs" style="margin-top: 30px;"><i class="fa fa-plus"> </i> Tambah</button>
-						</div>
-
-						<div class="col-md-2" style="margin-top: 30px;">
-							<input type="checkbox" name="cito" id="cito" class="flat-red" value="0"> Cito
-						</div>
-
-					</div>
-
-					<div class="box-body" id="tableResep">
-						<div class="col-md-12">
-							<table class="table table-bordered table-hover">
-								<thead>
-									<tr style="background-color: #A8CDFF;">
-										<th>Nama Obat</th>
-										<th>Jumlah</th>
-										<th>Aturan Pakai</th>
-										<th width="10">#</th>
-									</tr>
-								</thead>
-								<tbody id="rowResep">
-
-								</tbody>
-							</table>
+								<textarea name="ket_lab" class="form-control" placeholder="Materi Edukasi" rows="4" cols="50" required></textarea>
+							</div>
 						</div>
 
 					</div>
 				</div>
+				<div class="box box-primary" id="tx">
+					<div class="box-header with-border">
+						<h3 class="box-title">Edukasi</h3>
+					</div>
+					<div class="box-body">
+						<label class="col-sm-2 control-label">Kebutuhan Edukasi :</label>
+						<div class="col-sm-3">
+							<div class="input-group-text">
+								<input id="351" type="radio" name="jenis_pemeriksaan" value="penyakit">
+								<label for="351">Informasi Penyakit</label>
+							</div>
+							<div class="input-group-text">
+								<input id="351" type="radio" name="jenis_pemeriksaan" value="penyakit">
+								<label for="351">Informasi Administrasi</label>
+							</div>
+							<div class="input-group-text">
+								<input id="351" type="radio" name="jenis_pemeriksaan" value="penyakit">
+								<label for="351">Informasi Perawatan di Rumah</label>
+							</div>
+							<div class="input-group-text">
+								<input id="351" type="radio" name="jenis_pemeriksaan" value="penyakit">
+								<label for="351">Informasi Rujukan</label>
+							</div>
+						</div>
 
+						<div class="col-sm-7">
+							<label class="col-sm-3 control-label">Materi Edukasi :</label>
+							<div class="col-sm-8">
+								<textarea name="ket_lab" class="form-control" placeholder="Materi Edukasi" rows="4" cols="50" required></textarea>
+							</div>
+						</div>
+					</div>
+				</div>
 
 			</div>
 
 
 
-			<center>
-				<button type="submit" class="btn btn-primary btn-sm"><i class="fa fa-save"> </i> Simpan</button>
-				<!-- <button type="button" id="addTindakan" class="btn btn-info btn-sm"><i class="fa fa-plus"> </i> Tambah Tindakan</button> -->
-				<!-- <button type="button" id="deleteTindakan" class="btn btn-danger hidden btn-sm"><i class="fa fa-times"> </i> Hapus Tindakan</button> -->
-				<button type="button" id="addresep" class="btn btn-info btn-sm"><i class="fa fa-plus"> </i> Tambah Resep</button>
-				<button type="button" id="deleteresep" class="btn btn-danger hidden btn-sm"><i class="fa fa-times"> </i> Hapus Resep</button>
-				<button type="button" id="btn-lab" class="btn btn-info btn-sm <?php if ($kunj['id_lab'] != null) {
-																					echo 'hidden';
-																				} ?>"><i class="fa fa-plus"> </i> Tambah Data Lab</button>
-				<button type="button" id="btn-lab-del" class="btn btn-danger btn-sm <?php if ($kunj['id_lab'] == null) {
-																						echo 'hidden';
-																					} ?>"><i class="fa fa-times"> </i> Hapus Data Lab</button>
-				<button type="button" id="btn-rad" class="btn btn-info btn-sm <?php if ($kunj['id_radiologi'] != null) {
-																					echo 'hidden';
-																				} ?>"><i class="fa fa-plus"> </i> Tambah Data Radiologi</button>
-				<button type="button" id="btn-rad-del" class="btn btn-danger btn-sm <?php if ($kunj['id_radiologi'] == null) {
-																						echo 'hidden';
-																					} ?>"><i class="fa fa-times"> </i> Hapus Data Radiologi</button>
-				<!-- <button type="reset" class="btn btn-default btn-sm">Reset</button> -->
+			<div class="box box-primary hidden" id="rx">
+				<div class="box-header with-border">
+					<h3 class="box-title">Resep</h3>
+				</div>
+				<div class="box-body">
+					<div class="col-md-4">
+						<label>Nama Obat</label>
+						<select name="id_obat" class="form-control select2" id="id_obat" style="width: 100%">
+							<option value="">--pilih obat--</option>
+							<?php foreach ($obat as $o) : ?>
+								<option value="<?= $o->id_obat ?>"><?= $o->nama_obat ?></option>
+							<?php endforeach ?>
+						</select>
+						<small id="res-alergi"></small>
 
-			</center>
+					</div>
+
+					<div class="col-md-2">
+						<label>Jumlah</label>
+						<input type="number" name="jumlah" id="jumlah" min="0" class="form-control">
+					</div>
+
+					<div class="col-md-3">
+						<label>Aturan Pakai</label>
+						<input type="text" name="aturan_pakai" id="aturan_pakai" class="form-control">
+					</div>
+
+
+					<div class="col-md-1">
+						<button type="button" id="addResep" class="btn btn-success btn-xs" style="margin-top: 30px;"><i class="fa fa-plus"> </i> Tambah</button>
+					</div>
+
+					<div class="col-md-2" style="margin-top: 30px;">
+						<input type="checkbox" name="cito" id="cito" class="flat-red" value="0"> Cito
+					</div>
+
+				</div>
+
+				<div class="box-body" id="tableResep">
+					<div class="col-md-12">
+						<table class="table table-bordered table-hover">
+							<thead>
+								<tr style="background-color: #A8CDFF;">
+									<th>Nama Obat</th>
+									<th>Jumlah</th>
+									<th>Aturan Pakai</th>
+									<th width="10">#</th>
+								</tr>
+							</thead>
+							<tbody id="rowResep">
+
+							</tbody>
+						</table>
+					</div>
+
+				</div>
+			</div>
+
 
 		</div>
-		<?= form_close() ?>
+
+
+
+		<center>
+			<button type="submit" class="btn btn-primary btn-sm"><i class="fa fa-save"> </i> Simpan</button>
+			<!-- <button type="button" id="addTindakan" class="btn btn-info btn-sm"><i class="fa fa-plus"> </i> Tambah Tindakan</button> -->
+			<!-- <button type="button" id="deleteTindakan" class="btn btn-danger hidden btn-sm"><i class="fa fa-times"> </i> Hapus Tindakan</button> -->
+			<button type="button" id="addresep" class="btn btn-info btn-sm"><i class="fa fa-plus"> </i> Tambah Resep</button>
+			<button type="button" id="deleteresep" class="btn btn-danger hidden btn-sm"><i class="fa fa-times"> </i> Hapus Resep</button>
+			<button type="button" id="btn-lab" class="btn btn-info btn-sm <?php if ($kunj['id_lab'] != null) {
+																				echo 'hidden';
+																			} ?>"><i class="fa fa-plus"> </i> Tambah Data Lab</button>
+			<button type="button" id="btn-lab-del" class="btn btn-danger btn-sm <?php if ($kunj['id_lab'] == null) {
+																					echo 'hidden';
+																				} ?>"><i class="fa fa-times"> </i> Hapus Data Lab</button>
+			<button type="button" id="btn-rad" class="btn btn-info btn-sm <?php if ($kunj['id_radiologi'] != null) {
+																				echo 'hidden';
+																			} ?>"><i class="fa fa-plus"> </i> Tambah Data Radiologi</button>
+			<button type="button" id="btn-rad-del" class="btn btn-danger btn-sm <?php if ($kunj['id_radiologi'] == null) {
+																					echo 'hidden';
+																				} ?>"><i class="fa fa-times"> </i> Hapus Data Radiologi</button>
+			<!-- <button type="reset" class="btn btn-default btn-sm">Reset</button> -->
+
+		</center>
+
+</div>
+<?= form_close() ?>
 
 </div>
 <!-- /.col (RIGHT) -->
@@ -1025,6 +1114,26 @@ $this->load->view('leftbar');
 			$('#no_rm').val(no_rm);
 		});
 
+		//cek cara pulang
+		$('#rencanaInap').hide();
+
+		$('input:radio[name="cara_pulang"]').change(function() {
+
+			if ($(this).val() === 'd') {
+				$('#rencanaInap').show();
+			} else {
+				$('#rencanaInap').hide();
+
+			}
+		});
+		// if (document.getElementById('rawatInap').checked == true) {
+		// 	console.log('abc')
+		// } else {
+		// 	console.log('aodbawoj')
+		// }
+		$('#rawatInap').click(function() {
+			$('#rencanaInap').show();
+		});
 
 		umur();
 
