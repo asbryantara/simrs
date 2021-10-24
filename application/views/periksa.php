@@ -9,7 +9,7 @@ $this->load->view('leftbar');
 		padding: 5px;
 	}
 
-	.input-group-pulang >label {
+	.input-group-pulang>label {
 		margin: 5px;
 	}
 
@@ -177,7 +177,7 @@ $this->load->view('leftbar');
 
 							<label class="col-sm-2 control-label">Alergi</label>
 							<div class="col-sm-10">
-								<input type="text" name="alergi_obat" id="alergi_obat" class="form-control text-red" autocomplete="off">
+								<input type="text" name="alergi_obat" id="alergi_obat" value="<?= $kunj['alergi_px'] ?>" class="form-control text-red" autocomplete="off">
 							</div>
 						</div>
 						<div class="form-group">
@@ -641,31 +641,53 @@ $this->load->view('leftbar');
 						<h3 class="box-title">Edukasi</h3>
 					</div>
 					<div class="box-body">
-						<label class="col-sm-2 control-label">Kebutuhan Edukasi :</label>
-						<div class="col-sm-3">
-							<div class="input-group-text">
-								<input id="351" type="radio" name="jenis_pemeriksaan" value="penyakit">
-								<label for="351">Informasi Penyakit</label>
+						<div class="col-lg-12">
+
+							<label class="col-sm-2 control-label">Kebutuhan Edukasi :</label>
+							<div class="col-sm-3">
+								<div class="input-group-text">
+									<input id="123" type="radio" name="jenis_pemeriksaan" value="penyakit">
+									<label for="123">Informasi Penyakit</label>
+								</div>
+								<div class="input-group-text">
+									<input id="124" type="radio" name="jenis_pemeriksaan" value="penyakit">
+									<label for="124">Informasi Administrasi</label>
+								</div>
+								<div class="input-group-text">
+									<input id="125" type="radio" name="jenis_pemeriksaan" value="penyakit">
+									<label for="125">Informasi Perawatan di Rumah</label>
+								</div>
+								<div class="input-group-text">
+									<input id="126" type="radio" name="jenis_pemeriksaan" value="penyakit">
+									<label for="126">Informasi Rujukan</label>
+								</div>
 							</div>
-							<div class="input-group-text">
-								<input id="351" type="radio" name="jenis_pemeriksaan" value="penyakit">
-								<label for="351">Informasi Administrasi</label>
-							</div>
-							<div class="input-group-text">
-								<input id="351" type="radio" name="jenis_pemeriksaan" value="penyakit">
-								<label for="351">Informasi Perawatan di Rumah</label>
-							</div>
-							<div class="input-group-text">
-								<input id="351" type="radio" name="jenis_pemeriksaan" value="penyakit">
-								<label for="351">Informasi Rujukan</label>
+
+							<div class="col-sm-7">
+								<label class="col-sm-4 control-label">Kebutuhan Edukasi :</label>
+								<div class="col-sm-8">
+									<div class="input-group-text">
+										<input id="12" type="radio" name="verif_edu" value="penyakit">
+										<label for="12">Mengerti</label>
+									</div>
+									<div class="input-group-text">
+										<input id="13" type="radio" name="verif_edu" value="penyakit">
+										<label for="13">Re-Demonstrasi</label>
+									</div>
+									<div class="input-group-text">
+										<input id="14" type="radio" name="verif_edu" value="penyakit">
+										<label for="14">Re-Edukasi</label>
+									</div>
+								</div>
 							</div>
 						</div>
+						<div class="col-lg-8" style="margin-top:1em">
 
-						<div class="col-sm-7">
 							<label class="col-sm-3 control-label">Materi Edukasi :</label>
 							<div class="col-sm-8">
 								<textarea name="ket_lab" class="form-control" placeholder="Materi Edukasi" rows="4" cols="50" required></textarea>
 							</div>
+
 						</div>
 					</div>
 				</div>
