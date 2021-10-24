@@ -32,7 +32,8 @@ $this->load->view('leftbar');
 				<?php endif ?>
 
 				<?php if ($kunj['is_rad'] != 1) : ?>
-					<a href="<?= base_url('klinik/pengantar_rad/' . $this->uri->segment(3)) ?>" target="_blank" class="btn btn-primary"><i class="fa fa-envelope"> </i> Buat Pengantar Radiologi</a>
+					<button id="rad-show" class="btn btn-primary"><i class="fa fa-envelope"> </i> Buat Pengantar Radiologi</button>
+					<!-- <a href="<?= base_url('klinik/pengantar_rad/' . $this->uri->segment(3)) ?>" target="_blank" class="btn btn-primary"><i class="fa fa-envelope"> </i> Buat Pengantar Radiologi</a> -->
 				<?php endif ?>
 
 			</div>
@@ -682,7 +683,7 @@ $this->load->view('leftbar');
 </div>
 <!-- /.content-wrapper -->
 
-
+<!-- modal Lab -->
 <div class="modal fade bd-example-modal-lg modal-lab" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
 	<div class="modal-dialog modal-lg">
 		<?= form_open('klinik/kirimPasienLab', ['class' => 'form-horizontal']) ?>
@@ -788,6 +789,74 @@ $this->load->view('leftbar');
 		<?= form_close() ?>
 	</div>
 </div>
+
+<!-- modal Rad -->
+<div class="modal fade bd-example-modal-lg modal-rad" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+	<div class="modal-dialog modal-lg">
+		<?= form_open('klinik/kirimPasienRad', ['class' => 'form-horizontal']) ?>
+		<div class="modal-content">
+			<div class="modal-header">
+				<h3 class="modal-title">Pilih Radiologi</h3>
+			</div>
+			<div class="modal-body">
+				<h4 style="color:red">
+					Kirim pasien ke Radiologi
+				</h4>
+				<div class="row">
+
+					<input type="hidden" name="id_kunjungan" value="<?= $kunj['id_kunjungan'] ?>">
+
+					<div class="box-body">
+						<div class="form-group">
+							<label class="col-md-3 control-label" style="text-align:left">Jenis Pemeriksaan</label>
+
+							<div class="col-md-6">
+								<div class="input-group-text">
+									<input id="351" type="radio" name="jenis_pemeriksaan" value="xray" selected>
+									<label for="351">X Ray Umum</label>
+								</div>
+								<div class="input-group-text">
+									<input id="2" type="radio" name="jenis_pemeriksaan" value="usg">
+									<label for="2">USG</label>
+								</div>
+
+								<div class="input-group-text">
+									<input id="3" type="radio" name="jenis_pemeriksaan" value="cts">
+									<label for="3">CT-Scan</label>
+								</div>
+
+								<div class="input-group-text">
+									<input id="4" type="radio" name="jenis_pemeriksaan" value="mamo">
+									<label for="4">Mamografi</label>
+								</div>
+
+								<div class="input-group-text">
+									<input id="5" type="radio" name="jenis_pemeriksaan" value="angio">
+									<label for="5">Angiografi</label>
+								</div>
+							</div>
+						</div>
+
+						<div class="form-group">
+							<label class="control-label col-md-3" style="text-align:left">Keterangan</label>
+							<div class="col-md-6">
+								<textarea name="ket_rad" class="form-control" placeholder="Beri keterangan untuk petugas Laboratorium..." rows="4" cols="50" required></textarea>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="modal-footer">
+				<center>
+					<button type="submit" class="btn btn-primary btn-sm">Kirim</button>
+					<button type="button" class="btn btn-danger btn-sm" data-dismiss="modal">Tutup</button>
+				</center>
+			</div>
+		</div>
+		<?= form_close() ?>
+	</div>
+</div>
+
 <?php $this->load->view('footer') ?>
 
 <script>

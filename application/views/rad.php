@@ -46,26 +46,30 @@ $this->load->view('leftbar');
 							<label class="col-sm-2 control-label">No. RM</label>
 
 							<div class="col-sm-4">
-								<input type="text" name="no_rm" class="form-control" id="no_rm" autofocus="" required="">
+								<input type="text" name="no_rm" class="form-control" id="no_rm" value="<?= $pasien['no_rm'] ?>" autofocus="" required="" readonly>
 							</div>
 
 							<label class="col-sm-2 control-label">Nama Pasien </label>
 
 							<div class="col-sm-4">
-								<input type="text" name="nama_px" class="form-control" id="nama_px" disabled>
-								<input type="hidden" name="id_kunjungan" class="form-control" id="id_kunjungan">
+								<input type="text" name="nama_px" class="form-control" id="nama_px" value="<?= $pasien['nama_px'] ?>" disabled>
+								<input type="hidden" name="id_kunjungan" class="form-control" id="id_kunjungan" value="<?= $pasien['id_kunjungan'] ?>">
 							</div>
 						</div>
 
 						<div class="form-group">
 							<label class="col-sm-2 control-label">Jenis Kelamin </label>
 							<div class="col-sm-4">
-								<input type="text" id="jk_px" class="form-control" disabled>
+								<input type="text" id="jk_px" class="form-control" value="<?php if ($pasien['jk_px'] == 1) {
+																																						echo 'Laki-laki';
+																																					} else {
+																																						echo 'Perempuan';
+																																					} ?>" disabled>
 							</div>
 
 							<label class="col-sm-2 control-label">Alamat</label>
 							<div class="col-sm-4">
-								<textarea class="form-control" id="alamat_px" disabled=""></textarea>
+								<textarea class="form-control" id="alamat_px" disabled=""><?= $pasien['alamat_px'] ?></textarea>
 							</div>
 						</div>
 
@@ -73,14 +77,22 @@ $this->load->view('leftbar');
 							<label class="col-sm-2 control-label">Tempat Tanggal Lahir </label>
 
 							<div class="col-sm-4">
-								<input type="text" id="ttl" class="form-control" disabled="">
-								<small id="umur" style="font-weight: 700;"></small>
+								<input type="text" id="ttl" value="<?= $pasien['tempat_lahir_px'] . ', ' . $pasien['tgl_lahir_px'] ?>" class="form-control" disabled="">
+								<input type="hidden" id="biday" value="<?= $pasien['tgl_lahir_px'] ?>">
+
+								<small id="umur" style="font-weight: 700;"> </small>
 							</div>
 
 							<label class="col-sm-2 control-label">Pembayaran</label>
 
 							<div class="col-sm-4">
-								<input type="text" id="pembayaran" class="form-control" disabled>
+								<input type="text" id="pembayaran" class="form-control" value="<?php if ($pasien['asuransi_px'] == 1) {
+																																									echo 'Umum';
+																																								} elseif ($pasien['asuransi_px'] == 2) {
+																																									echo 'BPJS Kesehatan';
+																																								} else {
+																																									echo $pasien['asuransi_lain_px'];
+																																								} ?>" disabled>
 							</div>
 
 						</div>

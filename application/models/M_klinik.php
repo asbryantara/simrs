@@ -58,6 +58,15 @@ class M_klinik extends CI_Model
         return $this->db->get()->result();
     }
 
+    function periksa_rad(){
+        $this->db->select('*');
+        $this->db->from('kunjungan');
+        $this->db->join('pasien', 'kunjungan.no_rm=pasien.no_rm');
+        $this->db->where('status_kunjungan', '6');
+        $this->db->where('is_rad', '1');
+        return $this->db->get();
+    }
+
     function periksa_lab(){
         $this->db->select('*');
         $this->db->from('kunjungan');

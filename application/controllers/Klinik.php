@@ -173,10 +173,19 @@ class Klinik extends CI_Controller
 
 	function kirimPasienLab()
 	{
-
 		$data['is_lab'] = 1;
 		$data['status_kunjungan'] = 5;
 		$data['ket_lab'] = $this->input->post('ket_lab');
+		$id = $this->input->post('id_kunjungan');
+		$this->db->update('kunjungan', $data, ['id_kunjungan' => $id]);
+		redirect(base_url('klinik'));
+	}
+
+	function kirimPasienRad()
+	{
+		$data['is_rad'] = 1;
+		$data['status_kunjungan'] = 6;
+		$data['ket_lab'] = $this->input->post('ket_rad');
 		$id = $this->input->post('id_kunjungan');
 		$this->db->update('kunjungan', $data, ['id_kunjungan' => $id]);
 		redirect(base_url('klinik'));

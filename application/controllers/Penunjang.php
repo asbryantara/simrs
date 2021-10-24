@@ -20,7 +20,14 @@ class Penunjang extends CI_Controller {
 	}
 
 	public function rad(){
-		$this->load->view('rad');
+		$data['data'] = $this->klinik->periksa_rad()->result();
+		$this->load->view('rad_index', $data);
+	}
+
+	public function addRad(){
+		$id = $this->uri->segment(3);
+		$data['pasien'] = $this->daftar->detail($id)->row_array();
+		$this->load->view('rad' ,$data);
 	}
 
 	function autocomplete_lab(){
@@ -112,7 +119,7 @@ class Penunjang extends CI_Controller {
 		$this->db->limit('1');
 		$cek = $this->db->get('radiologi')->row_array();
 
-		$update = $this->db->update('kunjungan', ['id_radiologi'=>$cek['id_radiologi']], ['id_kunjungan'=>$id]);
+		$update = $this->db->update('kunjungan', ['id_radiologi'=>$cek['id_radiologi'],'status_kunjungan'=>1], ['id_kunjungan'=>$id]);
 		if($update){
 			$this->session->set_flashdata('success', 'Berhasil menambahkan data radiologi');
 			redirect(base_url('penunjang/rad'));
