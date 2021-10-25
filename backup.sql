@@ -1,22 +1,33 @@
-/*
-SQLyog Ultimate v12.4.3 (64 bit)
-MySQL - 10.4.13-MariaDB : Database - cdss
-*********************************************************************
-*/
+-- phpMyAdmin SQL Dump
+-- version 4.7.0
+-- https://www.phpmyadmin.net/
+--
+-- Host: 127.0.0.1
+-- Generation Time: Oct 11, 2019 at 08:23 AM
+-- Server version: 10.1.22-MariaDB
+-- PHP Version: 7.1.4
 
-/*!40101 SET NAMES utf8 */;
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
+START TRANSACTION;
+SET time_zone = "+00:00";
 
-/*!40101 SET SQL_MODE=''*/;
 
-/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
-/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
-/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
-/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
-CREATE DATABASE /*!32312 IF NOT EXISTS*/`cdss` /*!40100 DEFAULT CHARACTER SET utf8mb4 */;
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
 
-USE `cdss`;
+--
+-- Database: `cdss`
+--
 
-/*Table structure for table `antrian` */
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `antrian`
+--
+
 
 DROP TABLE IF EXISTS `antrian`;
 
@@ -32,7 +43,7 @@ CREATE TABLE `antrian` (
 
 /*Data for the table `antrian` */
 
-insert  into `antrian`(`id_antrian`,`tgl_antrian`,`no_antrian`,`jenis_antrian`,`loket_antrian`,`status_antrian`) values 
+insert  into `antrian`(`id_antrian`,`tgl_antrian`,`no_antrian`,`jenis_antrian`,`loket_antrian`,`status_antrian`) values
 (1,'2021-09-26 12:40:39','1','1','1','1');
 
 /*Table structure for table `config` */
@@ -48,7 +59,7 @@ CREATE TABLE `config` (
 
 /*Data for the table `config` */
 
-insert  into `config`(`id_config`,`nama_config`,`isi_config`) values 
+insert  into `config`(`id_config`,`nama_config`,`isi_config`) values
 (1,'Nama','Klinik Sejahtera Indah'),
 (2,'Alamat','jl. mastrip kotak pos 164 Jember'),
 (3,'Telp','(0331) 4466000'),
@@ -70,7 +81,7 @@ CREATE TABLE `desa` (
 
 /*Data for the table `desa` */
 
-insert  into `desa`(`id_desa`,`id_kecamatan`,`nama_desa`) values 
+insert  into `desa`(`id_desa`,`id_kecamatan`,`nama_desa`) values
 ('1101010001','1101010','LATIUNG'),
 ('1101010002','1101010','LABUHAN BAJAU'),
 ('1101010003','1101010','SUAK LAMATAN'),
@@ -75120,7 +75131,7 @@ CREATE TABLE `kecamatan` (
 
 /*Data for the table `kecamatan` */
 
-insert  into `kecamatan`(`id_kecamatan`,`id_kota_kab`,`nama_kecamatan`) values 
+insert  into `kecamatan`(`id_kecamatan`,`id_kota_kab`,`nama_kecamatan`) values
 ('1101010','1101','TEUPAH SELATAN'),
 ('1101020','1101','SIMEULUE TIMUR'),
 ('1101021','1101','TEUPAH BARAT'),
@@ -82349,7 +82360,7 @@ CREATE TABLE `konten` (
 
 /*Data for the table `konten` */
 
-insert  into `konten`(`id_konten`,`nama_konten`) values 
+insert  into `konten`(`id_konten`,`nama_konten`) values
 (1,'PARACETAMOL'),
 (2,'PSEUDOEFEDRIN HCL'),
 (3,'KLORFENIRAMIN MALEAT'),
@@ -82372,7 +82383,7 @@ CREATE TABLE `kota_kab` (
 
 /*Data for the table `kota_kab` */
 
-insert  into `kota_kab`(`id_kota_kab`,`id_provinsi`,`nama_kota_kab`) values 
+insert  into `kota_kab`(`id_kota_kab`,`id_provinsi`,`nama_kota_kab`) values
 ('1101','11','KABUPATEN SIMEULUE'),
 ('1102','11','KABUPATEN ACEH SINGKIL'),
 ('1103','11','KABUPATEN ACEH SELATAN'),
@@ -82962,7 +82973,7 @@ CREATE TABLE `master_diagnosa` (
 
 /*Data for the table `master_diagnosa` */
 
-insert  into `master_diagnosa`(`kode_diagnosa`,`nama_diagnosa`) values 
+insert  into `master_diagnosa`(`kode_diagnosa`,`nama_diagnosa`) values
 ('A01.0','TYPHOID FEVER'),
 ('A01.1','PARATYPHOID FEVER AKUT'),
 ('A90','DENGUE FEVER'),
@@ -82996,7 +83007,7 @@ CREATE TABLE `master_tindakan` (
 
 /*Data for the table `master_tindakan` */
 
-insert  into `master_tindakan`(`kode_tindakan`,`nama_tindakan`,`harga_tindakan`) values 
+insert  into `master_tindakan`(`kode_tindakan`,`nama_tindakan`,`harga_tindakan`) values
 ('88.19','Pasang Infus',80000),
 ('89.52','Electrocardiogram',100000),
 ('K0002','Pemeriksaan Radiologi',400000),
@@ -83022,7 +83033,7 @@ CREATE TABLE `obat` (
 
 /*Data for the table `obat` */
 
-insert  into `obat`(`id_obat`,`id_suplier`,`nama_obat`,`konten_obat`,`harga`,`stok`) values 
+insert  into `obat`(`id_obat`,`id_suplier`,`nama_obat`,`konten_obat`,`harga`,`stok`) values
 (1,1,'Asam Mefenamat','KOFEIN',6000,15),
 (2,1,'Amoxcillin','PENICILLIN',8000,101),
 (3,1,'Panicillin A','KLORFENIRAMIN MALEAT',9000,68),
@@ -83064,7 +83075,7 @@ CREATE TABLE `pasien` (
 
 /*Data for the table `pasien` */
 
-insert  into `pasien`(`no_rm`,`nik_px`,`nama_px`,`jk_px`,`tempat_lahir_px`,`tgl_lahir_px`,`alamat_px`,`id_desa`,`id_kecamatan`,`id_kota_kab`,`id_provinsi`,`pendidikan_px`,`asuransi_px`,`asuransi_lain_px`,`no_asuransi_px`,`pekerjaan_px`,`telp_px`,`agama_px`,`alergi_px`) values 
+insert  into `pasien`(`no_rm`,`nik_px`,`nama_px`,`jk_px`,`tempat_lahir_px`,`tgl_lahir_px`,`alamat_px`,`id_desa`,`id_kecamatan`,`id_kota_kab`,`id_provinsi`,`pendidikan_px`,`asuransi_px`,`asuransi_lain_px`,`no_asuransi_px`,`pekerjaan_px`,`telp_px`,`agama_px`,`alergi_px`) values
 ('000001','3514180505970001','NACHRUL JINAN','1','PASURUAN','1997-05-05','JAJAR LOR RT 1 RW 5','3514190016','3514190','3514','35','5','3','MANDIRI IN HEALTH','','4','098889998889','ISLAM',''),
 ('000002','3514180509970001','MUHAMMAD RIDWAN AL HADROH','1','JEMBER','1998-08-21','JL. KACA PIRING NO 3','3509710004','3509710','3509','35','3','2','MANDIRI IN HEALTH','25234234324','2','087776667778','ISLAM','PARACETAMOL'),
 ('000003','3514180505970001','SITI NUR HALIZAH','2','JEMBER','2001-09-09','JL. KARANG ANYAR','3201021001','3201021','3201','32','2','2','','23434324242324','0','085554445554','ISLAM',NULL),
@@ -83096,7 +83107,7 @@ CREATE TABLE `provinsi` (
 
 /*Data for the table `provinsi` */
 
-insert  into `provinsi`(`id_provinsi`,`nama_provinsi`) values 
+insert  into `provinsi`(`id_provinsi`,`nama_provinsi`) values
 ('11','ACEH'),
 ('12','SUMATERA UTARA'),
 ('13','SUMATERA BARAT'),
@@ -83179,7 +83190,7 @@ CREATE TABLE `suplier` (
 
 /*Data for the table `suplier` */
 
-insert  into `suplier`(`id_suplier`,`nama_suplier`,`alamat_suplier`,`telp_suplier`) values 
+insert  into `suplier`(`id_suplier`,`nama_suplier`,`alamat_suplier`,`telp_suplier`) values
 (1,'PT. Generik Pesona Farma','Jl. Pegunungan Terjal No 7. Kalimantan  Barat','087778889998'),
 (2,'PT. Medika Farma Jaya','Jl. Jawa No 5, Sumbersari, Jember','098889998889'),
 (3,'PT. Farma Udayana','Jl. Kh. Hasanudin No 4 Surabaya','087776667778'),
@@ -83200,7 +83211,7 @@ CREATE TABLE `tindakan` (
 
 /*Data for the table `tindakan` */
 
-insert  into `tindakan`(`id_tindakan`,`kode_tindakan`,`id_kunjungan`,`tgl_tindakan`,`id_user`) values 
+insert  into `tindakan`(`id_tindakan`,`kode_tindakan`,`id_kunjungan`,`tgl_tindakan`,`id_user`) values
 (1,'K001',3,'2019-10-04 10:43:40','1'),
 (2,'T0002',3,'2019-10-04 10:43:40','1'),
 (3,'89.52',2,'2019-10-04 10:43:52','1'),
@@ -83223,7 +83234,7 @@ CREATE TABLE `user` (
 
 /*Data for the table `user` */
 
-insert  into `user`(`id_user`,`nama_user`,`username`,`password`,`foto`,`level`,`hak_akses`) values 
+insert  into `user`(`id_user`,`nama_user`,`username`,`password`,`foto`,`level`,`hak_akses`) values
 ('1','Dr. Admin','admin','21232f297a57a5a743894a0e4a801fc3','default.png','1','semua'),
 ('123','123','tes','28b662d883b6d76fd96e4ddc5e9ba780','default.png','2','Pasien, Pendaftaran, Klinik'),
 ('19910909200710001','Dr. Muhammad Klinik','klinik','b9e6bea049953ede220418fef3ae1baa','default.png','2','Klinik'),
@@ -83233,7 +83244,220 @@ insert  into `user`(`id_user`,`nama_user`,`username`,`password`,`foto`,`level`,`
 ('19980909200720001','Siti Radiologiah','rad','340f7c2dcaedeae68e4a62c281c7350b','default.png','2','Radiologi'),
 ('20070909200310001','Muhammad Daftar','daftar','07aad1df9d8908b63e5e8170b2bcc819','default.png','2','Pendaftaran');
 
-/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
-/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
-/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
-/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
+--
+-- Indexes for dumped tables
+--
+
+--
+-- Indexes for table `antrian`
+--
+ALTER TABLE `antrian`
+  ADD PRIMARY KEY (`id_antrian`);
+
+--
+-- Indexes for table `config`
+--
+ALTER TABLE `config`
+  ADD PRIMARY KEY (`id_config`);
+
+--
+-- Indexes for table `desa`
+--
+ALTER TABLE `desa`
+  ADD PRIMARY KEY (`id_desa`),
+  ADD KEY `villages_district_id_index` (`id_kecamatan`);
+
+--
+-- Indexes for table `diagnosa`
+--
+ALTER TABLE `diagnosa`
+  ADD PRIMARY KEY (`id_diagnosa`);
+
+--
+-- Indexes for table `kasir`
+--
+ALTER TABLE `kasir`
+  ADD PRIMARY KEY (`id_bayar`);
+
+--
+-- Indexes for table `kecamatan`
+--
+ALTER TABLE `kecamatan`
+  ADD PRIMARY KEY (`id_kecamatan`),
+  ADD KEY `districts_id_index` (`id_kota_kab`);
+
+--
+-- Indexes for table `konten`
+--
+ALTER TABLE `konten`
+  ADD PRIMARY KEY (`id_konten`);
+
+--
+-- Indexes for table `kota_kab`
+--
+ALTER TABLE `kota_kab`
+  ADD PRIMARY KEY (`id_kota_kab`),
+  ADD KEY `regencies_province_id_index` (`id_provinsi`);
+
+--
+-- Indexes for table `kunjungan`
+--
+ALTER TABLE `kunjungan`
+  ADD PRIMARY KEY (`id_kunjungan`);
+
+--
+-- Indexes for table `lab`
+--
+ALTER TABLE `lab`
+  ADD PRIMARY KEY (`id_lab`);
+
+--
+-- Indexes for table `master_diagnosa`
+--
+ALTER TABLE `master_diagnosa`
+  ADD PRIMARY KEY (`kode_diagnosa`);
+
+--
+-- Indexes for table `master_tindakan`
+--
+ALTER TABLE `master_tindakan`
+  ADD PRIMARY KEY (`kode_tindakan`);
+
+--
+-- Indexes for table `obat`
+--
+ALTER TABLE `obat`
+  ADD PRIMARY KEY (`id_obat`);
+
+--
+-- Indexes for table `pasien`
+--
+ALTER TABLE `pasien`
+  ADD PRIMARY KEY (`no_rm`);
+
+--
+-- Indexes for table `provinsi`
+--
+ALTER TABLE `provinsi`
+  ADD PRIMARY KEY (`id_provinsi`);
+
+--
+-- Indexes for table `radiologi`
+--
+ALTER TABLE `radiologi`
+  ADD PRIMARY KEY (`id_radiologi`);
+
+--
+-- Indexes for table `resep`
+--
+ALTER TABLE `resep`
+  ADD PRIMARY KEY (`id_resep`);
+
+--
+-- Indexes for table `suplier`
+--
+ALTER TABLE `suplier`
+  ADD PRIMARY KEY (`id_suplier`);
+
+--
+-- Indexes for table `tindakan`
+--
+ALTER TABLE `tindakan`
+  ADD PRIMARY KEY (`id_tindakan`);
+
+--
+-- Indexes for table `user`
+--
+ALTER TABLE `user`
+  ADD PRIMARY KEY (`id_user`);
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `antrian`
+--
+ALTER TABLE `antrian`
+  MODIFY `id_antrian` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `config`
+--
+ALTER TABLE `config`
+  MODIFY `id_config` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+--
+-- AUTO_INCREMENT for table `diagnosa`
+--
+ALTER TABLE `diagnosa`
+  MODIFY `id_diagnosa` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=72;
+--
+-- AUTO_INCREMENT for table `kasir`
+--
+ALTER TABLE `kasir`
+  MODIFY `id_bayar` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+--
+-- AUTO_INCREMENT for table `konten`
+--
+ALTER TABLE `konten`
+  MODIFY `id_konten` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+--
+-- AUTO_INCREMENT for table `kunjungan`
+--
+ALTER TABLE `kunjungan`
+  MODIFY `id_kunjungan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+--
+-- AUTO_INCREMENT for table `lab`
+--
+ALTER TABLE `lab`
+  MODIFY `id_lab` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `obat`
+--
+ALTER TABLE `obat`
+  MODIFY `id_obat` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+--
+-- AUTO_INCREMENT for table `radiologi`
+--
+ALTER TABLE `radiologi`
+  MODIFY `id_radiologi` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `resep`
+--
+ALTER TABLE `resep`
+  MODIFY `id_resep` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `suplier`
+--
+ALTER TABLE `suplier`
+  MODIFY `id_suplier` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+--
+-- AUTO_INCREMENT for table `tindakan`
+--
+ALTER TABLE `tindakan`
+  MODIFY `id_tindakan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+--
+-- Constraints for dumped tables
+--
+
+--
+-- Constraints for table `desa`
+--
+ALTER TABLE `desa`
+  ADD CONSTRAINT `villages_district_id_foreign` FOREIGN KEY (`id_kecamatan`) REFERENCES `kecamatan` (`id_kecamatan`);
+
+--
+-- Constraints for table `kecamatan`
+--
+ALTER TABLE `kecamatan`
+  ADD CONSTRAINT `districts_regency_id_foreign` FOREIGN KEY (`id_kota_kab`) REFERENCES `kota_kab` (`id_kota_kab`);
+
+--
+-- Constraints for table `kota_kab`
+--
+ALTER TABLE `kota_kab`
+  ADD CONSTRAINT `regencies_province_id_foreign` FOREIGN KEY (`id_provinsi`) REFERENCES `provinsi` (`id_provinsi`);
+COMMIT;
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
