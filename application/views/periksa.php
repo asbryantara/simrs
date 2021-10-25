@@ -177,7 +177,7 @@ $this->load->view('leftbar');
 
 							<label class="col-sm-2 control-label">Alergi</label>
 							<div class="col-sm-10">
-								<input type="text" name="alergi_obat" id="alergi_obat" value="<?= $kunj['alergi_px'] ?>, " class="form-control text-red" autocomplete="off">
+								<input type="text" name="alergi_obat" id="alergi_obat" value="<?= $kunj['alergi_px'] ?>" class="form-control text-red" autocomplete="off">
 							</div>
 						</div>
 						<div class="form-group">
